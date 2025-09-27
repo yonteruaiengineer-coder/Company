@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spartex AI - Prompt Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* Slightly lighter background */
+        }
+        /* Defines the premium dark gradient for the primary button */
+        .bg-spartex {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-4xl w-full transform transition-all duration-300 hover:shadow-3xl">
+        <div class="flex items-center justify-center mb-6">
+            <!-- Icon now uses a bright indigo accent color -->
+            <svg class="h-12 w-12 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m14-6h2m-2 6h2M15 9a3 3 0 11-6 0 3 3 0 016 0zm-3-4a6 6 0 110 12A6 6 0 0112 5z" />
+            </svg>
+            <h1 class="text-4xl font-extrabold text-gray-800 ml-4">Spartex AI</h1>
+        </div>
+        <p class="text-center text-gray-600 mb-8 font-medium">
+            Generate a detailed and professional prompt for an SRS or FRD document.
+        </p>
+
+        <div class="space-y-6">
+            <div>
+                <label for="scenarioInput" class="block text-sm font-medium text-gray-700 mb-2">Explain Your Scenario:</label>
+                <textarea id="scenarioInput" rows="10" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-4 focus:ring-indigo-600 focus:border-transparent transition-colors duration-200 shadow-inner" placeholder="e.g., A mobile application for managing personal finances. It needs to track income and expenses, categorize transactions, and generate monthly budget reports."></textarea>
+            </div>
+
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <button id="srsButton" class="w-full bg-spartex text-white font-bold py-3 px-6 rounded-xl shadow-xl hover:shadow-2xl transition-transform transform hover:scale-[1.02] duration-200 active:scale-95">
+                    Generate SRS Document Prompt
+                </button>
+                <!-- FRD Button uses a contrasting vibrant teal color -->
+                <button id="frdButton" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-xl shadow-xl hover:shadow-2xl transition-transform transform hover:scale-[1.02] duration-200 active:scale-95">
+                    Generate FRD Document Prompt
+                </button>
+                <!-- New Wireframe Button -->
+                <button id="wireframeButton" class="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl shadow-xl hover:shadow-2xl transition-transform transform hover:scale-[1.02] duration-200 active:scale-95">
+                    Generate Wireframe Prompt
+                </button>
+            </div>
+        </div>
+
+        <div id="outputContainer" class="mt-8 hidden">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Generated Prompt:</h2>
+            <div class="relative bg-gray-100 p-6 rounded-lg border border-gray-200">
+                <pre id="promptOutput" class="whitespace-pre-wrap text-sm text-gray-700 leading-relaxed"></pre>
+                <button id="copyButton" class="absolute top-2 right-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-lg text-xs transition-colors duration-200">
+                    Copy
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scenarioInput = document.getElementById('scenarioInput');
+            const srsButton = document.getElementById('srsButton');
+            const frdButton = document.getElementById('frdButton');
+            const wireframeButton = document.getElementById('wireframeButton');
+            const outputContainer = document.getElementById('outputContainer');
+            const promptOutput = document.getElementById('promptOutput');
+            const copyButton = document.getElementById('copyButton');
+
+            const srsTemplate = `You are a highly skilled Business Analyst, FRD Specialist, and Solution Architect.
+Your task is to generate a comprehensive Software Requirements Specification (SRS) document strictly in Markdown format.
+The document must be fully detailed, professional, and suitable for review by business stakeholders, developers, and testers.
+Do not include any code snippets, pseudo-code, or implementation details — the document must remain functional and descriptive only.
+business reaquirement={ Scenario: [USER SCENARIO] }
+
+The generated SRS must strictly follow the structure below and provide complete, detailed content for each section:
+
+# Software Requirements Specification (SRS)
+## 1. Introduction
+### 1.1 Purpose
+### 1.2 Scope
+### 1.3 Definitions, Acronyms, Abbreviations
+### 1.4 References
+### 1.5 Overview
+## 2. Overall Description
+### 2.1 Product Perspective
+### 2.2 Product Functions
+### 2.3 User Classes & Characteristics
+### 2.4 Operating Environment
+### 2.5 Design & Implementation Constraints
+### 2.6 Assumptions & Dependencies
+## 3. System Features
+### 3.1 Functional Requirements
+### 3.2 Inputs, Processing, Outputs
+### 3.3 Error Handling & Exceptions
+## 4. External Interface Requirements
+### 4.1 User Interfaces (UI/UX)
+### 4.2 Hardware Interfaces
+### 4.3 Software Interfaces
+### 4.4 Communication Interfaces
+## 5. Non-Functional Requirements
+### 5.1 Performance
+### 5.2 Reliability
+### 5.3 Security
+### 5.4 Scalability
+### 5.5 Usability
+## 6. Other Requirements
+### 6.1 Compliance
+### 6.2 Data Migration, Backup, Recovery
+## 7. Appendices
+### 7.1 Glossary
+---`;
+
+            const frdTemplate = `You are a highly skilled Business Analyst, FRD Specialist, and Solution Architect.
+Your task is to generate a comprehensive Functional Requirements Document (FRD) strictly in Markdown format.
+The document must be fully detailed, professional, and suitable for review by business stakeholders, developers, and testers.
+Do not include any code snippets, pseudo-code, or implementation details — the document must remain functional and descriptive only.
+business reaquirement={ Scenario: [USER SCENARIO] }
+
+The generated FRD must strictly follow the structure below and provide complete, detailed content for each section:
+
+# Functional Requirements Document (FRD)
+## 1. Introduction
+### 1.1 Purpose
+### 1.2 Scope
+### 1.3 Business Context
+## 2. Business Requirements
+### 2.1 Problem Statement
+### 2.2 Objectives
+### 2.3 Business Rules
+## 3. Functional Requirements
+### 3.1 Use Cases / User Stories
+### 3.2 Process Flows
+### 3.3 Data Flow
+### 3.4 Reporting Requirements
+## 4. System Interactions
+### 4.1 User Interactions
+### 4.2 External Systems
+## 5. Non-Functional Requirements
+### 5.1 Security, Access Levels
+### 5.2 Audit, Compliance
+## 6. Acceptance Criteria
+### 6.1 Success Metrics
+### 6.2 Scenarios / Test Cases
+## 7. Appendices
+### 7.1 Glossary
+### 7.2 Supporting Documents
+---`;
+
+            const wireframeTemplate = `You are a UX/UI designer and front-end specialist. Generate a **low-fidelity, black-and-white wireframe** for a dynamic web page.
+business reaquirement={ Scenario: [USER SCENARIO] }
+
+Requirements:
+- Show the **full page layout** with clear sections: header, main content, input fields, buttons, side panels, output areas, and footer.
+- Include **interactive elements** visually: text areas, buttons, and dynamic output sections.
+- Represent **structure, spacing, and hierarchy** clearly with boxes, outlines, and placeholder text.
+- Use only **black-and-white style**: no colors, gradients, images, or shadows.
+- Label each component clearly (e.g., "Header Title", "Textarea Input", "Generate Button", "Output Area").
+- Indicate **user interactions visually** (e.g., arrows or notes like "click → updates output").
+- Make the layout **responsive** and suitable for stakeholder review or early prototyping.
+- Output should be in **HTML/CSS format**, ready to render in a browser as a wireframe.
+
+End result: A clear, professional, low-fidelity wireframe that shows page layout and user flow without design details.`;
+
+
+            function generatePrompt(template) {
+                const scenario = scenarioInput.value.trim();
+                if (scenario === "") {
+                    promptOutput.textContent = "Please enter a scenario before generating a prompt.";
+                    outputContainer.classList.remove('hidden');
+                    return;
+                }
+                // The replacement logic remains the same, replacing the single [USER SCENARIO] placeholder
+                // now nested inside the business reaquirement object.
+                const fullPrompt = template.replace('[USER SCENARIO]', scenario);
+                promptOutput.textContent = fullPrompt;
+                outputContainer.classList.remove('hidden');
+            }
+
+            srsButton.addEventListener('click', () => {
+                generatePrompt(srsTemplate);
+            });
+
+            frdButton.addEventListener('click', () => {
+                generatePrompt(frdTemplate);
+            });
+
+            wireframeButton.addEventListener('click', () => {
+                generatePrompt(wireframeTemplate);
+            });
+
+            copyButton.addEventListener('click', () => {
+                const promptText = promptOutput.textContent;
+                const textarea = document.createElement('textarea');
+                textarea.value = promptText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+
+                copyButton.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyButton.textContent = 'Copy';
+                }, 2000);
+            });
+        });
+    </script>
+
+</body>
+</html>
