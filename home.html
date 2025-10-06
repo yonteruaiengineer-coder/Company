@@ -3,1127 +3,792 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI as a Service - CompanyName</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Spartex AI - Low Fidelity Wireframe</title>
     <style>
-        :root {
-            --primary: #000;
-            --secondary: #fff;
-            --accent: #333;
-            --light-gray: #f5f5f5;
-            --medium-gray: #e0e0e0;
-            --dark-gray: #666;
-            --text-gray: #333;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            color: var(--text-gray);
-            background-color: var(--secondary);
+            font-family: Arial, sans-serif;
+            background: #fff;
+            color: #000;
             line-height: 1.6;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* Wireframe elements */
+        .wireframe-box {
+            border: 2px solid #000;
+            padding: 16px;
+            margin: 8px 0;
         }
         
-        /* Header Styles */
+        .wireframe-dashed {
+            border: 2px dashed #000;
+            padding: 16px;
+            margin: 8px 0;
+        }
+        
+        .wireframe-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        /* Header */
         header {
-            background-color: var(--secondary);
-            padding: 15px 0;
-            border-bottom: 1px solid var(--medium-gray);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .header-container {
+            border-bottom: 3px solid #000;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo {
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        
-        .company-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 25px;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: var(--dark-gray);
-        }
-        
-        .login-signup {
-            background-color: var(--primary);
-            color: var(--secondary);
-            padding: 8px 15px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-        
-        .login-signup:hover {
-            background-color: var(--accent);
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 100px 0;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            color: var(--secondary);
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: rgba(255,255,255,0.9);
-        }
-        
-        .cta-button {
+        .logo-box {
+            border: 2px solid #000;
+            padding: 12px 24px;
             display: inline-block;
-            background-color: var(--secondary);
-            color: var(--primary);
-            padding: 12px 30px;
-            border-radius: 4px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-item {
+            border: 1px solid #000;
+            padding: 8px 16px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: #000;
         }
         
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
         }
         
-        /* Approach Section */
-        .approach {
-            padding: 80px 0;
-            background-color: var(--light-gray);
+        .btn-outline {
+            border: 2px solid #000;
+            background: #fff;
+            padding: 10px 24px;
+            cursor: pointer;
+        }
+        
+        .btn-filled {
+            border: 2px solid #000;
+            background: #000;
+            color: #fff;
+            padding: 10px 24px;
+            cursor: pointer;
+        }
+        
+        /* Main content sections */
+        section {
+            padding: 60px 40px;
+            border-bottom: 2px solid #000;
         }
         
         .section-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 12px;
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-            position: relative;
         }
         
         .section-subtitle {
+            font-size: 16px;
+            margin-bottom: 40px;
             text-align: center;
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 60px;
-            color: var(--dark-gray);
         }
         
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--primary);
+        /* Hero Section */
+        .hero-headline {
+            border: 3px solid #000;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 32px;
         }
         
-        .approach-journey {
-            position: relative;
-            margin: 60px 0;
+        .hero-headline h1 {
+            font-size: 36px;
+            margin-bottom: 16px;
         }
         
-        .journey-path {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background-color: var(--medium-gray);
-            z-index: 1;
+        .hero-headline p {
+            font-size: 18px;
         }
         
-        .approach-steps {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            z-index: 2;
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
         }
         
-        .step {
-            flex-basis: 30%;
-            background-color: var(--secondary);
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
+        .process-step {
+            border: 2px solid #000;
+            padding: 24px;
+            text-align: center;
         }
         
-        .step:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .step-number {
-            position: absolute;
-            top: -20px;
-            left: 30px;
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary);
-            color: var(--secondary);
+        .step-badge {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #000;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 24px;
             font-weight: bold;
-            font-size: 1.2rem;
         }
         
-        .step-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-            text-align: center;
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 40px;
         }
         
-        .step h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-            text-align: center;
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
         }
         
-        .step-content {
-            margin-bottom: 20px;
+        .card {
+            border: 2px solid #000;
+            padding: 24px;
         }
         
-        .step-content h4 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: var(--primary);
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #000;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
+            justify-content: center;
         }
         
-        .step-content h4 i {
-            margin-right: 8px;
-            color: var(--primary);
-        }
-        
-        .step-content ul {
-            list-style-type: none;
-            margin-left: 25px;
-            margin-bottom: 15px;
-        }
-        
-        .step-content ul li {
-            position: relative;
-            margin-bottom: 8px;
-            color: var(--dark-gray);
-        }
-        
-        .step-content ul li::before {
-            content: "•";
-            position: absolute;
-            left: -15px;
-            color: var(--primary);
-        }
-        
-        .visual-idea {
-            display: flex;
-            align-items: center;
-            background-color: var(--light-gray);
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 15px;
-        }
-        
-        .visual-idea i {
-            font-size: 1.5rem;
-            margin-right: 10px;
-            color: var(--primary);
-        }
-        
-        .visual-idea p {
-            margin: 0;
-            color: var(--dark-gray);
-            font-style: italic;
-        }
-        
-        .why-choose-us {
-            margin-top: 80px;
-            text-align: center;
-        }
-        
-        .why-choose-us h2 {
-            font-size: 2.2rem;
-            margin-bottom: 40px;
-            color: var(--primary);
-        }
-        
-        .benefits {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        
-        .benefit {
-            flex-basis: 30%;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        
-        .benefit:hover {
-            transform: translateY(-5px);
-        }
-        
-        .benefit-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        .benefit h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        .benefit p {
-            color: var(--dark-gray);
-        }
-        
-        /* Services Section */
-        .services {
-            padding: 80px 0;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .service-card {
-            background-color: var(--light-gray);
-            border-radius: 8px;
-            padding: 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .service-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .service-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        .service-card p {
-            color: var(--dark-gray);
-            flex-grow: 1;
-        }
-        
-        /* Industries Section */
-        .industries {
-            padding: 80px 0;
-            background-color: var(--light-gray);
-        }
-        
-        .industries-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-        
-        .industry-card {
-            background-color: var(--secondary);
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 1px solid var(--medium-gray);
-        }
-        
-        .industry-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-        
-        .industry-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        .industry-card h3 {
-            font-size: 1.2rem;
-            color: var(--primary);
-        }
-        
-        /* Case Studies Section */
-        .case-studies {
-            padding: 80px 0;
-        }
-        
-        .case-studies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .case-card {
-            background-color: var(--light-gray);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .case-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .case-image {
-            height: 200px;
-            background-color: var(--medium-gray);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .case-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .case-card:hover .case-image img {
-            transform: scale(1.05);
-        }
-        
-        .case-content {
-            padding: 25px;
-        }
-        
-        .case-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        .case-content p {
-            color: var(--dark-gray);
-            margin-bottom: 15px;
-        }
-        
-        .metrics {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--medium-gray);
-        }
-        
-        .metric {
-            text-align: center;
-        }
-        
-        .metric-value {
-            font-size: 1.5rem;
+        .card-title {
+            font-size: 18px;
             font-weight: bold;
-            color: var(--primary);
+            margin-bottom: 12px;
         }
         
-        .metric-label {
-            font-size: 0.9rem;
-            color: var(--dark-gray);
+        .card-description {
+            border: 2px dashed #000;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 14px;
         }
         
-        .read-more {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            transition: margin-left 0.3s;
+        .card-link {
+            text-decoration: underline;
+            cursor: pointer;
         }
         
-        .read-more:hover {
-            margin-left: 5px;
-        }
-        
-        /* About Us Section */
-        .about {
-            padding: 80px 0;
-            background-color: var(--light-gray);
-        }
-        
-        .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 300px;
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
         }
         
         .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--primary);
+            font-size: 20px;
+            font-weight: bold;
+            margin: 24px 0 12px;
         }
         
-        .about-text p {
-            color: var(--dark-gray);
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-        
-        .vision-mission {
-            margin-top: 30px;
-        }
-        
-        .vision-mission h4 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        .team-photo {
-            flex: 1;
-            min-width: 300px;
+        .image-placeholder {
+            border: 2px solid #000;
             height: 400px;
-            background-color: var(--medium-gray);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
         }
         
-        .team-photo img {
+        /* Contact Form */
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .form-input {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            border: 2px solid #000;
+            padding: 12px;
+            font-size: 16px;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            border: 2px solid #000;
+            padding: 12px;
+            min-height: 120px;
+            font-size: 16px;
+        }
+        
+        .contact-info-item {
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #000;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 12px;
         }
         
         /* Footer */
         footer {
-            background-color: var(--primary);
-            color: var(--secondary);
-            padding: 60px 0 20px;
+            background: #f5f5f5;
+            padding: 40px;
+            border-top: 3px solid #000;
         }
         
-        .footer-content {
+        .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
         }
         
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            color: var(--secondary);
+        .footer-column h4 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            text-decoration: underline;
         }
         
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-            width: 40px;
-            height: 2px;
-            background-color: var(--secondary);
-        }
-        
-        .footer-column p {
-            margin-bottom: 20px;
-            color: rgba(255,255,255,0.8);
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-column ul li a {
-            color: rgba(255,255,255,0.8);
+        .footer-link {
+            display: block;
+            margin-bottom: 8px;
             text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-column ul li a:hover {
-            color: var(--secondary);
+            color: #000;
         }
         
         .social-icons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin-top: 20px;
         }
         
-        .social-icons a {
-            color: var(--secondary);
-            font-size: 1.2rem;
+        .social-icon {
             width: 40px;
             height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border: 2px solid #000;
             border-radius: 50%;
-            background-color: rgba(255,255,255,0.1);
-            transition: all 0.3s;
-        }
-        
-        .social-icons a:hover {
-            background-color: rgba(255,255,255,0.2);
-            transform: translateY(-3px);
-        }
-        
-        .newsletter {
-            margin-top: 20px;
-        }
-        
-        .newsletter p {
-            margin-bottom: 15px;
-        }
-        
-        .newsletter-form {
-            display: flex;
-        }
-        
-        .newsletter input {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 4px 0 0 4px;
-        }
-        
-        .newsletter button {
-            background-color: var(--secondary);
-            color: var(--primary);
-            border: none;
-            padding: 0 15px;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-        
-        .newsletter button:hover {
-            background-color: var(--light-gray);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.7);
+            padding-top: 20px;
+            border-top: 2px solid #000;
         }
         
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .header-container {
+            header {
                 flex-direction: column;
+                gap: 16px;
             }
             
-            .logo-container {
-                margin-bottom: 15px;
-            }
-            
-            nav ul {
+            .nav-menu {
                 flex-direction: column;
-                align-items: center;
+                gap: 8px;
             }
             
-            nav ul li {
-                margin: 5px 0;
+            .two-column {
+                grid-template-columns: 1fr;
             }
             
-            .hero h1 {
-                font-size: 2rem;
+            .cards-grid {
+                grid-template-columns: 1fr;
             }
             
-            .approach-steps {
-                flex-direction: column;
+            .process-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .step {
-                flex-basis: 100%;
-                margin-bottom: 40px;
-            }
-            
-            .journey-path {
-                display: none;
-            }
-            
-            .benefits {
-                flex-direction: column;
-            }
-            
-            .benefit {
-                flex-basis: 100%;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
+        }
+        
+        /* Interaction Notes */
+        .interaction-note {
+            font-size: 11px;
+            font-style: italic;
+            color: #666;
+            margin-top: 8px;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+
+    <!-- HEADER SECTION -->
     <header>
-        <div class="container header-container">
-            <div class="logo-container">
-                <div class="logo"></div>
-                <div class="company-name">CompanyName</div>
+        <div>
+            <div class="wireframe-label">[Logo Component]</div>
+            <div class="logo-box">
+                <span style="font-size: 20px;">⚡</span> Spartex AI
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Research</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#" class="login-signup">Login/Signup</a></li>
-                </ul>
-            </nav>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="wireframe-label">[Navigation Menu]</div>
+            <a href="#home" class="nav-item">Home</a>
+            <a href="#services" class="nav-item">Services</a>
+            <a href="#research" class="nav-item">Research</a>
+            <a href="#about" class="nav-item">Careers</a>
+            <a href="#contact" class="nav-item">Contact</a>
+            <div class="interaction-note">→ Smooth scroll to sections (Careers scrolls to About section)</div>
+        </nav>
+        
+        <div class="auth-buttons">
+            <div class="wireframe-label">[Auth Buttons]</div>
+            <button class="btn-outline">Login</button>
+            <button class="btn-filled">Sign Up</button>
+            <div class="interaction-note">→ Navigate to auth pages</div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>AI as a Service – Empowering Your Business with Intelligent Solutions</h1>
-            <p>Transform your operations, automate workflows, and leverage AI to make smarter decisions.</p>
-            <a href="#" class="cta-button">Schedule a Demo</a>
+    <!-- HERO SECTION -->
+    <section id="home">
+        <div class="wireframe-label">[Hero Section]</div>
+        
+        <div class="hero-headline">
+            <h1>Spartex AI</h1>
+            <p>AI as a Service – Empowering Your Business with Intelligent Solutions</p>
         </div>
-    </section>
-
-    <!-- Approach Section -->
-    <section class="approach">
-        <div class="container">
-            <h2 class="section-title">How We Solve Your Business Challenges with AI</h2>
-            <p class="section-subtitle">From research to tailored AI solutions, we guide you step-by-step to measurable business impact.</p>
-            
-            <div class="approach-journey">
-                <div class="journey-path"></div>
-                <div class="approach-steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-icon">
-                            <i class="fas fa-microscope"></i>
-                        </div>
-                        <h3>Iterative R&D – Explore & Prototype</h3>
-                        <div class="step-content">
-                            <h4><i class="fas fa-check-circle"></i> What We Do:</h4>
-                            <ul>
-                                <li>Conduct in-depth research into your business and industry</li>
-                                <li>Identify key pain points and opportunities</li>
-                                <li>Build prototypes and proofs of concept (POCs) to validate ideas quickly</li>
-                            </ul>
-                            
-                            <h4><i class="fas fa-star"></i> Why It Matters:</h4>
-                            <ul>
-                                <li>Reduces risk before full-scale implementation</li>
-                                <li>Demonstrates tangible AI benefits early</li>
-                                <li>Ensures solutions are aligned with real business needs</li>
-                            </ul>
-                        </div>
-                        <div class="visual-idea">
-                            <i class="fas fa-lightbulb"></i>
-                            <p>Research → Prototype → Test</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h3>Understand Your Business Deeply</h3>
-                        <div class="step-content">
-                            <h4><i class="fas fa-check-circle"></i> What We Do:</h4>
-                            <ul>
-                                <li>Analyze your workflows, processes, and data</li>
-                                <li>Collaborate with stakeholders to understand goals, constraints, and success metrics</li>
-                                <li>Map AI opportunities to actual business outcomes</li>
-                            </ul>
-                            
-                            <h4><i class="fas fa-star"></i> Why It Matters:</h4>
-                            <ul>
-                                <li>Ensures AI solutions are strategically aligned</li>
-                                <li>Minimizes misalignment between technology and business priorities</li>
-                                <li>Builds trust through transparent discovery</li>
-                            </ul>
-                        </div>
-                        <div class="visual-idea">
-                            <i class="fas fa-sitemap"></i>
-                            <p>Business Process → Insights → Opportunities</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h3>Tailored AI Solutions – Design & Deliver</h3>
-                        <div class="step-content">
-                            <h4><i class="fas fa-check-circle"></i> What We Do:</h4>
-                            <ul>
-                                <li>Craft AI systems customized for your unique challenges</li>
-                                <li>Integrate machine learning, multi-agent systems, and LLMs where applicable</li>
-                                <li>Provide solutions that drive measurable ROI, improve efficiency, and enhance customer experience</li>
-                            </ul>
-                            
-                            <h4><i class="fas fa-star"></i> Why It Matters:</h4>
-                            <ul>
-                                <li>Delivers real business value, not just technology</li>
-                                <li>Supports informed decision-making and automation</li>
-                                <li>Positions your company as a forward-thinking leader in your industry</li>
-                            </ul>
-                        </div>
-                        <div class="visual-idea">
-                            <i class="fas fa-cogs"></i>
-                            <p>Design → Build → Deploy → Measure Impact</p>
-                        </div>
-                    </div>
-                </div>
+        
+        <h2 class="section-title">What Our Approach & Why Choose Us</h2>
+        
+        <h3 style="text-align: center; margin: 40px 0 20px;">Our Process to Understand Your Business</h3>
+        
+        <div style="position: relative; text-align: center; margin: 20px 0 40px; padding: 20px 0;">
+            <!-- Left Hand/Bracket for Code Line -->
+            <div style="position: absolute; left: 20%; top: 0; bottom: 0; width: 60px; border: 3px solid #000; border-right: none; border-radius: 30px 0 0 30px;">
             </div>
             
-            <div class="why-choose-us">
-                <h2>Why Choose Us</h2>
-                <div class="benefits">
-                    <div class="benefit">
-                        <div class="benefit-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Measurable Results</h3>
-                        <p>We focus on delivering tangible business outcomes and ROI, not just technology implementation.</p>
-                    </div>
-                    <div class="benefit">
-                        <div class="benefit-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <h3>Collaborative Approach</h3>
-                        <p>We work closely with your team to ensure solutions align with your business goals and culture.</p>
-                    </div>
-                    <div class="benefit">
-                        <div class="benefit-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h3>Innovative Solutions</h3>
-                        <p>We leverage cutting-edge AI technologies to create solutions that give you a competitive edge.</p>
-                    </div>
-                </div>
+            <!-- Right Hand/Bracket for Code Line -->
+            <div style="position: absolute; right: 20%; top: 0; bottom: 0; width: 60px; border: 3px solid #000; border-left: none; border-radius: 0 30px 30px 0;">
             </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services">
-        <div class="container">
-            <h2 class="section-title">Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>Multi-agent AI Solutions</h3>
-                    <p>AI systems for SMBs with multiple intelligent agents working together to solve complex business challenges.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>AI Chatbots & Virtual Assistants</h3>
-                    <p>Intelligent chatbots powered by retrieval-augmented generation for accurate, context-aware responses.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3>LLM Integration</h3>
-                    <p>Seamlessly integrate large language models into your systems for automation & productivity enhancement.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3>Custom AI Product Development</h3>
-                    <p>Tailored solutions including Resume Generation, ATS Analyzer, and Mock Interviews to meet your specific needs.</p>
-                </div>
+            
+            <!-- Code Invocation in Center -->
+            <div style="display: inline-block; border: 2px solid #000; padding: 16px 32px; font-family: 'Courier New', monospace; font-size: 18px; background: #f5f5f5; position: relative; z-index: 1;">
+                spartexAI.invoke("your Business problem")
             </div>
+            <div class="wireframe-label" style="margin-top: 8px;">[Code-style invocation embraced by curved hands]</div>
         </div>
-    </section>
-
-    <!-- Industries Section -->
-    <section class="industries">
-        <div class="container">
-            <h2 class="section-title">Industries We Serve – Small & Medium Businesses</h2>
-            <div class="industries-grid">
-                <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <h3>Retail</h3>
-                </div>
-                <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-hospital"></i>
-                    </div>
-                    <h3>Healthcare</h3>
-                </div>
-                <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h3>Finance</h3>
-                </div>
-                <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <h3>Logistics</h3>
-                </div>
-                <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3>Professional Services</h3>
-                </div>
-                <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <h3>Attorneys & Lawyers</h3>
-                </div>
+        
+        <div style="position: relative; padding: 40px 0;">
+            <!-- Left Hand/Bracket -->
+            <div style="position: absolute; left: 5%; top: 0; bottom: 0; width: 80px; border: 3px solid #000; border-right: none; border-radius: 40px 0 0 40px;">
             </div>
-        </div>
-    </section>
-
-    <!-- Case Studies Section -->
-    <section class="case-studies">
-        <div class="container">
-            <h2 class="section-title">Case Studies & Success Stories</h2>
-            <div class="case-studies-grid">
-                <div class="case-card">
-                    <div class="case-image">
-                        <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Retail Transformation">
-                    </div>
-                    <div class="case-content">
-                        <h3>Retail Transformation</h3>
-                        <p>Implemented AI-powered inventory management for a retail chain, resulting in significant cost reduction and improved efficiency.</p>
-                        <div class="metrics">
-                            <div class="metric">
-                                <div class="metric-value">30%</div>
-                                <div class="metric-label">Cost Reduction</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">45%</div>
-                                <div class="metric-label">Efficiency Gain</div>
-                            </div>
-                        </div>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="case-card">
-                    <div class="case-image">
-                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Healthcare Innovation">
-                    </div>
-                    <div class="case-content">
-                        <h3>Healthcare Innovation</h3>
-                        <p>Developed AI diagnostics tools for a healthcare provider, improving patient outcomes and streamlining operations.</p>
-                        <div class="metrics">
-                            <div class="metric">
-                                <div class="metric-value">25%</div>
-                                <div class="metric-label">Better Outcomes</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">40%</div>
-                                <div class="metric-label">Time Saved</div>
-                            </div>
-                        </div>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="case-card">
-                    <div class="case-image">
-                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Financial Efficiency">
-                    </div>
-                    <div class="case-content">
-                        <h3>Financial Efficiency</h3>
-                        <p>Automated loan processing for a financial institution, drastically reducing approval time and improving customer satisfaction.</p>
-                        <div class="metrics">
-                            <div class="metric">
-                                <div class="metric-value">60%</div>
-                                <div class="metric-label">Faster Approval</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">35%</div>
-                                <div class="metric-label">Cost Savings</div>
-                            </div>
-                        </div>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+            
+            <!-- Right Hand/Bracket -->
+            <div style="position: absolute; right: 5%; top: 0; bottom: 0; width: 80px; border: 3px solid #000; border-left: none; border-radius: 0 40px 40px 0;">
             </div>
-        </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section class="about">
-        <div class="container">
-            <h2 class="section-title">About Us</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Our Startup Story</h3>
-                    <p>Founded in 2020, our company emerged from a shared vision to democratize AI technology for small and medium businesses. Our founders, with decades of experience in AI and business transformation, recognized the need for accessible, practical AI solutions that could drive real business value without requiring massive investments.</p>
+            
+            <!-- Process Steps in Center -->
+            <div style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
+                <div class="process-step">
+                    <div class="step-badge">1</div>
+                    <h4>Iterative R&D – Explore & Prototype</h4>
                     
-                    <div class="vision-mission">
-                        <h4>Vision</h4>
-                        <p>To empower every business with the transformative power of AI, regardless of size or industry, creating a more efficient and innovative business landscape.</p>
-                        
-                        <h4>Mission</h4>
-                        <p>To develop and deliver innovative AI solutions that solve real business problems, drive efficiency, and create sustainable competitive advantages for our clients through continuous research and development.</p>
+                    <div class="wireframe-dashed" style="margin: 16px 0;">
+                        <strong>What We Do:</strong><br>
+                        • Conduct in-depth research into your business and industry<br>
+                        • Identify key pain points and opportunities<br>
+                        • Build prototypes and proofs of concept (POCs) to validate ideas quickly
+                    </div>
+                    
+                    <div class="wireframe-dashed" style="margin: 16px 0;">
+                        <strong>Why It Matters:</strong><br>
+                        • Reduces risk before full-scale implementation<br>
+                        • Demonstrates tangible AI benefits early<br>
+                        • Ensures solutions are aligned with real business needs
+                    </div>
+                    
+                    <div style="margin-top: 16px; font-style: italic; text-align: center;">
+                        Research → Prototype → Test
                     </div>
                 </div>
-                <div class="team-photo">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Our Team">
+                
+                <div class="process-step">
+                    <div class="step-badge">2</div>
+                    <h4>Understand Your Business Deeply</h4>
+                    
+                    <div class="wireframe-dashed" style="margin: 16px 0;">
+                        <strong>What We Do:</strong><br>
+                        • Analyze your workflows, processes, and data<br>
+                        • Collaborate with stakeholders to understand goals, constraints, and success metrics<br>
+                        • Map AI opportunities to actual business outcomes
+                    </div>
+                    
+                    <div class="wireframe-dashed" style="margin: 16px 0;">
+                        <strong>Why It Matters:</strong><br>
+                        • Ensures AI solutions are strategically aligned<br>
+                        • Minimizes misalignment between technology and business priorities<br>
+                        • Builds trust through transparent discovery
+                    </div>
+                    
+                    <div style="margin-top: 16px; font-style: italic; text-align: center;">
+                        Business Process → Insights → Opportunities
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-badge">3</div>
+                    <h4>Tailored AI Solutions – Design & Deliver</h4>
+                    
+                    <div class="wireframe-dashed" style="margin: 16px 0;">
+                        <strong>What We Do:</strong><br>
+                        • Craft AI systems customized for your unique challenges<br>
+                        • Integrate machine learning, multi-agent systems, and LLMs where applicable<br>
+                        • Provide solutions that drive measurable ROI, improve efficiency, and enhance customer experience
+                    </div>
+                    
+                    <div class="wireframe-dashed" style="margin: 16px 0;">
+                        <strong>Why It Matters:</strong><br>
+                        • Delivers real business value, not just technology<br>
+                        • Supports informed decision-making and automation<br>
+                        • Positions your company as a forward-thinking leader in your industry
+                    </div>
+                    
+                    <div style="margin-top: 16px; font-style: italic; text-align: center;">
+                        Design → Build → Deploy → Measure Impact
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wireframe-label" style="text-align: center; margin-top: 20px;">[Two curved "hands" embrace the process steps]</div>
+        </div>
+        
+        <div class="cta-buttons">
+            <button class="btn-filled" style="padding: 16px 40px; font-size: 18px;">Get Started</button>
+            <button class="btn-outline" style="padding: 16px 40px; font-size: 18px;">Learn More</button>
+            <div class="interaction-note">→ Scroll to Contact / Services</div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services">
+        <div class="wireframe-label">[Services Section]</div>
+        
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">Specialized AI solutions designed for small and medium businesses</p>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">[Network Icon]</div>
+                <div class="card-title">Multi-agent AI Solutions</div>
+                <div class="card-description">
+                    Intelligent systems with multiple AI agents working together to solve complex business challenges
+                </div>
+                <a href="#" class="card-link">Learn More →</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">[Chat Icon]</div>
+                <div class="card-title">AI Chatbots & Virtual Assistants</div>
+                <div class="card-description">
+                    24/7 customer support with context-aware AI chatbots powered by advanced NLP
+                </div>
+                <a href="#" class="card-link">Learn More →</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">[Brain Icon]</div>
+                <div class="card-title">LLM Integration</div>
+                <div class="card-description">
+                    Seamlessly integrate large language models into your existing systems for automation
+                </div>
+                <a href="#" class="card-link">Learn More →</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">[Code Icon]</div>
+                <div class="card-title">Custom AI Product Development</div>
+                <div class="card-description">
+                    Tailored AI solutions including resume generation, ATS analysis, and more
+                </div>
+                <a href="#" class="card-link">Learn More →</a>
+            </div>
+        </div>
+        <div class="interaction-note">→ Hover: Card elevation effect | Click: Navigate to service details</div>
+    </section>
+
+    <!-- INDUSTRIES SECTION -->
+    <section>
+        <div class="wireframe-label">[Industries Section]</div>
+        
+        <h2 class="section-title">Industries We Serve - Small & Medium Businesses</h2>
+        <p class="section-subtitle">Specialized AI solutions for various industry sectors</p>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">[Cart Icon]</div>
+                <div class="card-title">Retail</div>
+                <p>Inventory management, customer service, and sales forecasting</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">[Medical Icon]</div>
+                <div class="card-title">Healthcare</div>
+                <p>Patient scheduling, diagnostic support, and administrative automation</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">[Bank Icon]</div>
+                <div class="card-title">Finance</div>
+                <p>Fraud detection, customer service, and financial forecasting</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">[Truck Icon]</div>
+                <div class="card-title">Logistics</div>
+                <p>Route optimization, demand forecasting, and supply chain management</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">[Briefcase Icon]</div>
+                <div class="card-title">Professional Services</div>
+                <p>Client management, document processing, and workflow automation</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">[Gavel Icon]</div>
+                <div class="card-title">Attorneys and Lawyers</div>
+                <p>Document analysis, case research, and client communication</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDIES SECTION -->
+    <section>
+        <div class="wireframe-label">[Case Studies Section]</div>
+        
+        <h2 class="section-title">Case Studies & Success Stories</h2>
+        <p class="section-subtitle">Discover how our AI solutions have transformed small and medium businesses</p>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <div class="image-placeholder">[Store/Retail Image]</div>
+                <div class="card-title">Retail Chain Optimization</div>
+                <div class="wireframe-dashed">
+                    <strong>Results:</strong><br>
+                    • 35% cost reduction<br>
+                    • 28% satisfaction improvement
+                </div>
+                <a href="#" class="card-link">Read Case Study →</a>
+            </div>
+            
+            <div class="card">
+                <div class="image-placeholder">[Handshake/Manufacturing Image]</div>
+                <div class="card-title">Manufacturing Efficiency</div>
+                <div class="wireframe-dashed">
+                    <strong>Results:</strong><br>
+                    • 42% output increase<br>
+                    • Streamlined production process
+                </div>
+                <a href="#" class="card-link">Read Case Study →</a>
+            </div>
+            
+            <div class="card">
+                <div class="image-placeholder">[Hospital/Patient Image]</div>
+                <div class="card-title">Healthcare Provider Transformation</div>
+                <div class="wireframe-dashed">
+                    <strong>Results:</strong><br>
+                    • 60% reduction in no-shows<br>
+                    • Improved patient scheduling
+                </div>
+                <a href="#" class="card-link">Read Case Study →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section>
+        <div class="wireframe-label">[About Section]</div>
+        
+        <h2 class="section-title">About Us</h2>
+        
+        <div class="two-column">
+            <div class="about-text">
+                <h3>Our Startup Story</h3>
+                <div class="wireframe-dashed">
+                    Founded in 2023, Spartex AI emerged from a vision to democratize artificial intelligence for small and medium businesses. Our founders recognized that powerful AI solutions were primarily accessible only to large enterprises, leaving SMBs without the tools to compete in an increasingly digital marketplace.
+                </div>
+                
+                <h3>Vision</h3>
+                <div class="wireframe-dashed">
+                    To democratize AI technology, making it accessible and practical for small and medium businesses worldwide. We believe every business deserves the power of intelligent automation.
+                </div>
+                
+                <h3>Mission</h3>
+                <div class="wireframe-dashed">
+                    Empowering SMBs with accessible, effective, and affordable AI solutions that drive real business value. We focus on measurable outcomes, not just technology implementation.
+                </div>
+                
+                <h3>Careers</h3>
+                <div class="wireframe-dashed">
+                    Join our team of innovators dedicated to transforming how businesses leverage AI technology. We're looking for passionate individuals who want to make a real impact on small and medium businesses.
+                    <br><br>
+                    <a href="#contact" class="card-link">View Open Positions →</a>
+                </div>
+            </div>
+            
+            <div>
+                <div class="image-placeholder">
+                    [Team Photo - Collaborative Workspace]<br>
+                    Shows team members working together
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <div class="wireframe-label">[Contact Section]</div>
+        
+        <h2 class="section-title">Contact Us</h2>
+        
+        <div class="two-column">
+            <div>
+                <div class="wireframe-dashed" style="margin-bottom: 32px;">
+                    We'd love to hear from you! Whether you have questions about our services, want to discuss a project, or just want to say hello, feel free to reach out.
+                </div>
+                
+                <div class="contact-info-item">
+                    <span class="contact-icon">[Map Icon]</span>
+                    <strong>Address</strong><br>
+                    123 AI Innovation Drive<br>
+                    Tech City, TC 12345
+                </div>
+                
+                <div class="contact-info-item">
+                    <span class="contact-icon">[Phone Icon]</span>
+                    <strong>Phone</strong><br>
+                    <a href="tel:4142750857" style="text-decoration: underline;">4142750857</a>
+                </div>
+                
+                <div class="contact-info-item">
+                    <span class="contact-icon">[Email Icon]</span>
+                    <strong>Email</strong><br>
+                    <a href="mailto:contact.support@spartexai.com" style="text-decoration: underline;">contact.support@spartexai.com</a>
+                </div>
+                
+                <div class="contact-info-item">
+                    <span class="contact-icon">[Clock Icon]</span>
+                    <strong>Business Hours</strong><br>
+                    Office: Monday - Friday, 9:00 AM - 6:00 PM<br>
+                    AI Support: 24/7 Available
+                </div>
+            </div>
+            
+            <div class="wireframe-box">
+                <div class="wireframe-label">[Contact Form Component]</div>
+                <h3 style="margin-bottom: 24px;">Send Us a Message</h3>
+                
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Name *</label>
+                        <input type="text" class="form-input" placeholder="Your full name">
+                        <div class="interaction-note">Validation: 2-100 characters, letters only</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-input" placeholder="your.email@example.com">
+                        <div class="interaction-note">Validation: Valid email format required</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Subject *</label>
+                        <input type="text" class="form-input" placeholder="How can we help you?">
+                        <div class="interaction-note">Validation: 5-200 characters</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Message *</label>
+                        <textarea class="form-textarea" placeholder="Tell us more about your needs..."></textarea>
+                        <div class="interaction-note">Validation: 10-2000 characters</div>
+                    </div>
+                    
+                    <button type="submit" class="btn-filled" style="width: 100%; padding: 16px; font-size: 16px;">Send Message</button>
+                    <div class="interaction-note">→ Click: Validate → Submit to API → Show success/error message</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>CompanyName</h3>
-                    <p>Transforming businesses through innovative AI solutions tailored to your unique needs.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Case Studies</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#">Multi-agent AI Solutions</a></li>
-                        <li><a href="#">AI Chatbots</a></li>
-                        <li><a href="#">LLM Integration</a></li>
-                        <li><a href="#">Custom AI Development</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> 123 AI Street, Tech City</li>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> info@companyname.com</li>
-                    </ul>
-                    <div class="newsletter">
-                        <p>Subscribe to our newsletter</p>
-                        <div class="newsletter-form">
-                            <input type="email" placeholder="Your email">
-                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </div>
+        <div class="wireframe-label">[Footer Section]</div>
+        
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="#about" class="footer-link">About Us</a>
+                <a href="#team" class="footer-link">Our Team</a>
+                <a href="#careers" class="footer-link">Careers</a>
+                <a href="#news" class="footer-link">News</a>
             </div>
-            <div class="copyright">
-                <p>&copy; 2023 CompanyName. All rights reserved.</p>
+            
+            <div class="footer-column">
+                <h4>Services</h4>
+                <a href="#services" class="footer-link">Multi-agent AI Solutions</a>
+                <a href="#services" class="footer-link">AI Chatbots</a>
+                <a href="#services" class="footer-link">LLM Integration</a>
+                <a href="#services" class="footer-link">Custom Development</a>
             </div>
+            
+            <div class="footer-column">
+                <h4>Industries</h4>
+                <a href="#industries" class="footer-link">Retail</a>
+                <a href="#industries" class="footer-link">Healthcare</a>
+                <a href="#industries" class="footer-link">Finance</a>
+                <a href="#industries" class="footer-link">Logistics</a>
+                <a href="#industries" class="footer-link">Professional Services</a>
+                <a href="#industries" class="footer-link">Legal</a>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Contact Us</h4>
+                <a href="mailto:contact.support@spartexai.com" class="footer-link">contact.support@spartexai.com</a>
+                <a href="tel:4142750857" class="footer-link">4142750857</a>
+                <p style="margin-top: 12px; font-size: 14px;">123 AI Innovation Drive<br>Tech City, TC 12345</p>
+                
+                <div class="social-icons">
+                    <div class="social-icon" title="Twitter">[T]</div>
+                    <div class="social-icon" title="LinkedIn">[in]</div>
+                    <div class="social-icon" title="GitHub">[G]</div>
+                    <div class="social-icon" title="YouTube">[Y]</div>
+                </div>
+                <div class="interaction-note">→ Click: Open social media profiles in new tab</div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2023 Spartex AI. All rights reserved.
         </div>
     </footer>
+
 </body>
 </html>
