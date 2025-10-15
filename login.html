@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Spartex AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for aesthetic, just in case, but primary design goal is no scroll */
+        /* Note: The main body is set to overflow-hidden to enforce the user's requirement. */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1F2937; /* Darker scrollbar */
+            border-radius: 2px;
+        }
+        /* Inter font setup */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Subtle white border animation */
+        @keyframes subtleWhiteGlow {
+            0% {
+                box-shadow: 0 0 3px rgba(255, 255, 255, 0.2), 0 0 6px rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 6px rgba(255, 255, 255, 0.4), 0 0 12px rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 3px rgba(255, 255, 255, 0.2), 0 0 6px rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+        }
+        
+        .animated-border {
+            animation: subtleWhiteGlow 3s ease-in-out infinite;
+            border-width: 1px !important;
+        }
+    </style>
+</head>
+<!-- Body background is already bg-black -->
+<body class="bg-black text-white antialiased">
+
+    <!-- Main Container: Enforces Full Viewport Height and No Scrolling (overflow-hidden) -->
+    <div class="h-screen w-screen flex items-center justify-center p-4 overflow-hidden">
+
+        <!-- UPDATED: Changed container background to bg-black for the deepest black theme -->
+        <div class="max-w-6xl w-full h-full lg:max-h-[90vh] bg-black rounded-2xl shadow-2xl p-0
+                    grid lg:grid-cols-2 gap-0 overflow-hidden">
+
+            <!-- LEFT COLUMN: Hero Content (Now includes a dummy image) -->
+            <div class="hidden lg:flex flex-col justify-center p-10 bg-indigo-950 rounded-l-2xl">
+                <div class="space-y-8 text-center">
+                    <!-- Dummy Image/Placeholder for AI Concept -->
+                    <img src="https://placehold.co/400x200/1E293B/A5B4FC?text=Welcome+Back" 
+                         alt="Welcome Back Placeholder" 
+                         class="w-full max-w-sm mx-auto rounded-lg shadow-xl"/>
+
+                    <h1 class="text-5xl font-extrabold tracking-tight leading-tight">
+                        Welcome Back
+                    </h1>
+                    <p class="text-indigo-300 text-lg">
+                        Sign in to continue your AI journey with Spartex AI.
+                    </p>
+                    <p class="text-xl font-semibold text-white pt-4">
+                        Access your dashboard and continue where you left off
+                    </p>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Login Form (Primary focus, designed to fit) -->
+            <div class="w-full h-full flex flex-col p-6 sm:p-8 lg:p-10 overflow-y-auto">
+                
+                <!-- Title for Mobile -->
+                <h1 class="text-3xl font-bold mb-4 lg:hidden text-center">Sign In</h1>
+
+                <form id="login-form" class="space-y-4 flex-grow">
+                    
+                    <!-- Email Field -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300">Email Address <span class="text-red-400">*</span></label>
+                        <!-- UPDATED: Input background changed to bg-gray-900 for subtle differentiation against black container -->
+                         <input type="email" id="email" placeholder="Enter your email" required class="mt-1 w-full p-3 bg-gray-900 border border-gray-800 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-sm focus:outline-none focus:border-indigo-400 animated-border">
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-300">Password <span class="text-red-400">*</span></label>
+                        <!-- UPDATED: Input background changed to bg-gray-900 -->
+                         <input type="password" id="password" placeholder="Enter your password" required class="mt-1 w-full p-3 bg-gray-900 border border-gray-800 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-sm focus:outline-none focus:border-indigo-400 animated-border">
+                    </div>
+
+                    <!-- Message Box for Validation/Confirmation -->
+                    <div id="message-box" class="hidden p-2 text-center text-sm rounded-lg" role="alert"></div>
+
+                    <!-- Primary Action -->
+                    <button type="submit" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-semibold shadow-lg transition duration-150 ease-in-out mt-6">
+                        Sign In
+                    </button>
+                </form>
+
+                <!-- Alternative Login / Social Options -->
+                <div class="mt-4 pt-4 border-t border-gray-800 space-y-3">
+                    <p class="text-center text-sm text-gray-400">or continue with</p>
+                    <div class="flex space-x-3">
+                        <!-- Google Button (UPDATED: Button background is now white/5 for even darker look) -->
+                        <button class="flex-1 py-2 px-4 bg-white/5 hover:bg-white/10 rounded-lg text-sm font-medium flex items-center justify-center transition duration-150">
+                            <!-- Simple G icon SVG -->
+                            <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22.5 12.0006c0-.85-.078-1.68-.225-2.483H12.277v4.685h6.39c-.277 1.488-1.077 2.766-2.228 3.665v3.085h3.945c2.316-2.14 3.666-5.26 3.666-9.002z" fill="#4285F4"/>
+                                <path d="M12.277 23.9996c3.15 0 5.8-1.048 7.734-2.846l-3.945-3.085c-1.09.734-2.52 1.164-3.79 1.164-2.924 0-5.405-1.98-6.3-4.63H2.07v3.18c1.94 3.842 5.922 6.516 10.207 6.516z" fill="#34A853"/>
+                                <path d="M5.977 14.4556c-.23-.695-.36-1.432-.36-2.189 0-.757.13-1.494.36-2.189V6.906H2.07c-.722 1.43-1.127 3.016-1.127 4.904 0 1.888.405 3.474 1.127 4.904l3.907-3.354z" fill="#FBBC04"/>
+                                <path d="M12.277 5.3616c1.657 0 3.14.568 4.312 1.677l3.483-3.396C17.974 1.442 15.324 0 12.277 0 7.992 0 4.01 2.674 2.07 6.516l3.907 3.353c.895-2.65 3.376-4.63 6.3-4.63z" fill="#EA4335"/>
+                            </svg>
+                            Google
+                        </button>
+                        <!-- Facebook Button (UPDATED: Button background is now white/5 for even darker look) -->
+                        <button class="flex-1 py-2 px-4 bg-white/5 hover:bg-white/10 rounded-lg text-sm font-medium flex items-center justify-center transition duration-150">
+                            <!-- Simple F icon SVG -->
+                            <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.373 0 0 5.373 0 12c0 5.99 4.388 11.006 10.125 11.854v-8.381H7.172v-3.473h2.953V9.45c0-2.927 1.777-4.52 4.372-4.52 1.246 0 2.313.223 2.625.32V7.5H15.6c-1.446 0-1.725.688-1.725 1.69v2.227h3.89l-.62 3.473h-3.27v8.38c5.736-.848 10.125-5.864 10.125-11.853C24 5.373 18.627 0 12 0z" fill="#1877F2"/>
+                            </svg>
+                            Facebook
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Login / Navigation Links (Pushed to bottom) -->
+                <div class="mt-auto pt-4 space-y-2 text-center text-sm">
+                    <p class="text-gray-400">
+                        New to Spartex AI? <a href="sigup.html" class="text-indigo-400 hover:text-indigo-300 font-semibold">Create an account</a>
+                    </p>
+                    <p>
+                        <a href="spartex_ai_website.html" class="text-gray-400 hover:text-gray-300 transition duration-150 text-xs">← Back to Home</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const messageBox = document.getElementById('message-box');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        function displayMessage(text, isError = false) {
+            messageBox.textContent = text;
+            // The red and green message boxes remain the same for contrast
+            messageBox.className = isError 
+                ? 'p-2 text-center text-sm rounded-lg bg-red-800 text-red-300 block'
+                : 'p-2 text-center text-sm rounded-lg bg-green-800 text-green-300 block';
+        }
+
+        // Basic client-side validation
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            messageBox.classList.add('hidden');
+            messageBox.textContent = '';
+            
+            let isValid = true;
+            
+            // Check email format (basic regex)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailInput.value.trim() || !emailRegex.test(emailInput.value)) {
+                isValid = false;
+                emailInput.classList.add('border-red-500');
+                displayMessage("Please enter a valid email address.", true);
+                return;
+            } else {
+                emailInput.classList.remove('border-red-500');
+            }
+
+            // Check password
+            if (!passwordInput.value.trim() || passwordInput.value.length < 8) {
+                isValid = false;
+                passwordInput.classList.add('border-red-500');
+                displayMessage("Password must be at least 8 characters long.", true);
+                return;
+            } else {
+                passwordInput.classList.remove('border-red-500');
+            }
+
+            if (isValid) {
+                // SUCCESS: Simulate login
+                console.log('Login data submitted:', {
+                    email: emailInput.value,
+                });
+                displayMessage("Login successful! Redirecting to dashboard...", false);
+                // In a real application, you would now call an API and redirect the user.
+                form.reset();
+                
+                // Redirect to main website after successful login
+                setTimeout(() => {
+                    window.location.href = 'spartex_ai_website.html';
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
