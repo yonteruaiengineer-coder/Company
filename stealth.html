@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frosted Glass AI Interface</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for modern, clean SVG icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Use Inter font family -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow: hidden; 
+        }
+
+        /* The Frosted Glass Effect CSS */
+        .frosted-card {
+            background-color: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Background setup */
+        .background-content {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .background-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6); 
+        }
+
+        /* Style for the floating action button */
+        .floating-button {
+            background-color: rgb(66, 133, 244);
+            box-shadow: 0 0 15px 5px rgba(66, 133, 244, 0.7);
+            transition: all 0.2s ease-in-out;
+        }
+        .floating-button:hover {
+            box-shadow: 0 0 20px 8px rgba(66, 133, 244, 0.9);
+            transform: scale(1.05);
+        }
+        
+        /* Recording animation */
+        .recording {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        
+        /* Waveform animation */
+        .waveform {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .waveform-bar {
+            width: 4px;
+            background-color: #3b82f6;
+            border-radius: 2px;
+            animation: waveform 1.2s ease-in-out infinite;
+        }
+        
+        .waveform-bar:nth-child(2) { animation-delay: 0.1s; }
+        .waveform-bar:nth-child(3) { animation-delay: 0.2s; }
+        .waveform-bar:nth-child(4) { animation-delay: 0.3s; }
+        .waveform-bar:nth-child(5) { animation-delay: 0.4s; }
+        
+        @keyframes waveform {
+            0%, 100% { height: 5px; }
+            50% { height: 20px; }
+        }
+        
+        /* Tab styling */
+        .tab-active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-bottom: 2px solid #3b82f6;
+        }
+        
+        /* Code syntax highlighting */
+        .code-block {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid #3b82f6;
+        }
+        
+        /* Scrollbar styling */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+
+    <!-- Background Content -->
+    <div class="background-content">
+        <!-- Using a placeholder image for a generic background -->
+        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Abstract background image">
+    </div>
+
+    <!-- Interface Overlay Container -->
+    <div class="flex justify-center items-center h-screen p-4">
+        
+        <!-- The Main Transparent Box -->
+        <div class="w-full max-w-2xl h-[600px] mx-auto rounded-3xl frosted-card shadow-2xl flex flex-col p-6 relative">
+            
+            <!-- Floating Button - Top Right -->
+            <button class="floating-button absolute -top-5 right-5 text-white py-2 px-4 rounded-full font-semibold text-sm flex items-center space-x-2">
+                <i data-lucide="mic" class="w-4 h-4"></i>
+                <span>What should I say?</span>
+            </button>
+
+            <!-- Header -->
+            <div class="mb-6">
+                <h1 class="text-xl font-bold text-white">AI Assistant</h1>
+                <p class="text-sm text-gray-300">Ask questions, generate code, or analyze content</p>
+            </div>
+
+            <!-- Input Section -->
+            <div class="mb-6">
+                <div class="flex items-center mb-2">
+                    <i data-lucide="mic" class="w-4 h-4 text-gray-300 mr-2"></i>
+                    <span class="text-sm text-gray-300">Input (STT / User Input)</span>
+                </div>
+                
+                <!-- Audio Input Controls -->
+                <div class="flex space-x-3 mb-4">
+                    <button id="internalMic" class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition">
+                        <i data-lucide="monitor" class="w-4 h-4"></i>
+                        <span>Internal Mic</span>
+                    </button>
+                    <button id="externalMic" class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white transition">
+                        <i data-lucide="mic" class="w-4 h-4"></i>
+                        <span>External Mic</span>
+                    </button>
+                </div>
+                
+                <!-- Recording Status -->
+                <div id="recordingStatus" class="hidden flex items-center space-x-2 mb-3 p-3 rounded-lg bg-white bg-opacity-10">
+                    <div class="waveform">
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                        <div class="waveform-bar"></div>
+                    </div>
+                    <span class="text-sm text-white">Recording in progress...</span>
+                </div>
+                
+                <!-- Text Input -->
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="userInput"
+                        placeholder="Type your question or speak now..." 
+                        class="w-full bg-white bg-opacity-10 text-white placeholder-gray-400 p-4 rounded-xl border border-white border-opacity-20 focus:outline-none focus:border-opacity-50 transition"
+                    >
+                    <button id="clearInput" class="absolute right-3 top-3 text-gray-400 hover:text-white transition">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                
+                <!-- Live Transcription -->
+                <div id="transcription" class="mt-3 p-3 bg-white bg-opacity-5 rounded-xl text-sm text-gray-300 min-h-[60px]">
+                    <span class="italic">Live transcription will appear here...</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex space-x-3 mb-6">
+                <button class="action-btn flex-1 flex items-center justify-center space-x-2 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white transition shadow-lg shadow-cyan-500/30">
+                    <i data-lucide="lightbulb" class="w-4 h-4"></i>
+                    <span>Answer</span>
+                </button>
+                <button class="action-btn flex-1 flex items-center justify-center space-x-2 py-3 rounded-xl bg-purple-500 hover:bg-purple-600 text-white transition shadow-lg shadow-purple-500/30">
+                    <i data-lucide="code" class="w-4 h-4"></i>
+                    <span>Code</span>
+                </button>
+                <button class="action-btn flex-1 flex items-center justify-center space-x-2 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white transition shadow-lg shadow-orange-500/30">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                    <span>Analyze</span>
+                </button>
+                <button class="action-btn flex-1 flex items-center justify-center space-x-2 py-3 rounded-xl bg-pink-500 hover:bg-pink-600 text-white transition shadow-lg shadow-pink-500/30">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    <span>Summarize</span>
+                </button>
+            </div>
+
+            <!-- Output Section -->
+            <div class="flex-grow flex flex-col">
+                <div class="flex items-center mb-2">
+                    <i data-lucide="message-square" class="w-4 h-4 text-gray-300 mr-2"></i>
+                    <span class="text-sm text-gray-300">Output (AI Responses)</span>
+                </div>
+                
+                <!-- Output Tabs -->
+                <div class="flex space-x-1 mb-3">
+                    <button class="tab-btn px-3 py-2 rounded-t-lg text-sm text-gray-300 tab-active">Text Answer</button>
+                    <button class="tab-btn px-3 py-2 rounded-t-lg text-sm text-gray-300">Code</button>
+                    <button class="tab-btn px-3 py-2 rounded-t-lg text-sm text-gray-300">Summary</button>
+                    <button class="tab-btn px-3 py-2 rounded-t-lg text-sm text-gray-300">Analysis</button>
+                </div>
+                
+                <!-- Output Content Area -->
+                <div class="flex-grow bg-white bg-opacity-5 rounded-xl rounded-tl-none p-4 custom-scrollbar overflow-y-auto">
+                    <div id="outputContent" class="text-white text-opacity-90">
+                        <p class="mb-4">AI responses will appear here. You can ask questions, request code generation, or ask for analysis of content.</p>
+                        
+                        <!-- Example Code Block -->
+                        <div class="code-block p-3 rounded-lg mb-4 font-mono text-sm">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-blue-400">// Example code response</span>
+                                <button class="copy-btn text-gray-400 hover:text-white transition">
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            <pre class="whitespace-pre-wrap"><code class="text-green-400">function helloWorld() {
+  console.log("Hello, World!");
+}</code></pre>
+                        </div>
+                        
+                        <!-- Example Analysis -->
+                        <div class="p-3 bg-white bg-opacity-10 rounded-lg">
+                            <p class="text-sm">Based on your query, here's a detailed analysis of the requested information...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Output Actions -->
+                <div class="flex justify-end space-x-2 mt-3">
+                    <button class="flex items-center space-x-1 px-3 py-2 rounded-lg bg-white bg-opacity-10 hover:bg-opacity-20 text-white text-sm transition">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                        <span>Copy</span>
+                    </button>
+                    <button class="flex items-center space-x-1 px-3 py-2 rounded-lg bg-white bg-opacity-10 hover:bg-opacity-20 text-white text-sm transition">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Export</span>
+                    </button>
+                    <button class="flex items-center space-x-1 px-3 py-2 rounded-lg bg-white bg-opacity-10 hover:bg-opacity-20 text-white text-sm transition">
+                        <i data-lucide="highlighter" class="w-4 h-4"></i>
+                        <span>Highlight</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons after the DOM loads
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            
+            // Get DOM elements
+            const internalMicBtn = document.getElementById('internalMic');
+            const externalMicBtn = document.getElementById('externalMic');
+            const recordingStatus = document.getElementById('recordingStatus');
+            const clearInputBtn = document.getElementById('clearInput');
+            const userInput = document.getElementById('userInput');
+            const transcription = document.getElementById('transcription');
+            const actionButtons = document.querySelectorAll('.action-btn');
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            
+            // Recording state
+            let isRecording = false;
+            let recordingType = ''; // 'internal' or 'external'
+            
+            // Toggle recording function
+            function toggleRecording(type) {
+                if (isRecording && recordingType === type) {
+                    // Stop recording
+                    isRecording = false;
+                    recordingStatus.classList.add('hidden');
+                    internalMicBtn.classList.remove('recording');
+                    externalMicBtn.classList.remove('recording');
+                    
+                    // Update button text
+                    if (type === 'internal') {
+                        internalMicBtn.innerHTML = '<i data-lucide="monitor" class="w-4 h-4"></i><span>Internal Mic</span>';
+                    } else {
+                        externalMicBtn.innerHTML = '<i data-lucide="mic" class="w-4 h-4"></i><span>External Mic</span>';
+                    }
+                    
+                    // Update transcription with final text
+                    transcription.innerHTML = '<span class="text-green-400">✓ Recording complete. Transcription ready.</span>';
+                } else {
+                    // Start recording
+                    isRecording = true;
+                    recordingType = type;
+                    recordingStatus.classList.remove('hidden');
+                    
+                    // Update active button
+                    if (type === 'internal') {
+                        internalMicBtn.classList.add('recording');
+                        internalMicBtn.innerHTML = '<div class="waveform"><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div></div><span>Stop</span>';
+                    } else {
+                        externalMicBtn.classList.add('recording');
+                        externalMicBtn.innerHTML = '<div class="waveform"><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div></div><span>Stop</span>';
+                    }
+                    
+                    // Simulate live transcription
+                    simulateTranscription();
+                }
+                
+                // Re-initialize icons
+                lucide.createIcons();
+            }
+            
+            // Simulate live transcription (for demo purposes)
+            function simulateTranscription() {
+                if (!isRecording) return;
+                
+                const phrases = [
+                    "Hello, how can I help you today?",
+                    "I'm looking for information about",
+                    "Can you generate code for a",
+                    "Please analyze the following content",
+                    "I need a summary of"
+                ];
+                
+                let currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+                let currentIndex = 0;
+                
+                transcription.innerHTML = '';
+                
+                const typeInterval = setInterval(() => {
+                    if (!isRecording) {
+                        clearInterval(typeInterval);
+                        return;
+                    }
+                    
+                    if (currentIndex < currentPhrase.length) {
+                        const char = currentPhrase.charAt(currentIndex);
+                        const span = document.createElement('span');
+                        span.textContent = char;
+                        
+                        // Highlight keywords
+                        if (char.match(/[a-zA-Z]/) && (currentIndex === 0 || currentPhrase.charAt(currentIndex-1) === ' ')) {
+                            const word = currentPhrase.substring(currentIndex).split(' ')[0];
+                            if (word.length > 4) {
+                                span.className = 'text-cyan-300 font-medium';
+                            }
+                        }
+                        
+                        transcription.appendChild(span);
+                        currentIndex++;
+                    } else {
+                        clearInterval(typeInterval);
+                    }
+                }, 100);
+            }
+            
+            // Clear input field
+            clearInputBtn.addEventListener('click', () => {
+                userInput.value = '';
+                transcription.innerHTML = '<span class="italic">Live transcription will appear here...</span>';
+            });
+            
+            // Action button handlers
+            actionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const action = button.querySelector('span').textContent;
+                    
+                    // Update output content based on action
+                    const outputContent = document.getElementById('outputContent');
+                    
+                    switch(action) {
+                        case 'Answer':
+                            outputContent.innerHTML = `
+                                <p class="mb-4">Based on your query, here's a comprehensive answer:</p>
+                                <div class="p-3 bg-white bg-opacity-10 rounded-lg mb-4">
+                                    <p>The AI has processed your request and provided a detailed response. This could include explanations, step-by-step guides, or direct answers to your questions.</p>
+                                </div>
+                                <p class="text-sm text-gray-400">You can ask follow-up questions or request more details on specific aspects.</p>
+                            `;
+                            break;
+                        case 'Code':
+                            outputContent.innerHTML = `
+                                <p class="mb-4">Here's the code you requested:</p>
+                                <div class="code-block p-3 rounded-lg mb-4 font-mono text-sm">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-blue-400">// Example JavaScript function</span>
+                                        <button class="copy-btn text-gray-400 hover:text-white transition">
+                                            <i data-lucide="copy" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                    <pre class="whitespace-pre-wrap"><code class="text-green-400">function calculateSum(a, b) {
+  return a + b;
+}
+
+// Usage example
+const result = calculateSum(5, 3);
+console.log(result); // Output: 8</code></pre>
+                                </div>
+                                <p class="text-sm text-gray-400">You can modify this code or request implementations in other languages.</p>
+                            `;
+                            break;
+                        case 'Analyze':
+                            outputContent.innerHTML = `
+                                <p class="mb-4">Analysis Results:</p>
+                                <div class="p-3 bg-white bg-opacity-10 rounded-lg mb-4">
+                                    <p class="font-medium mb-2">Key Insights:</p>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>Identified 3 main patterns in the data</li>
+                                        <li>Detected potential optimization opportunities</li>
+                                        <li>Found correlations between variables A and B</li>
+                                    </ul>
+                                </div>
+                                <div class="p-3 bg-white bg-opacity-10 rounded-lg">
+                                    <p class="font-medium mb-2">Recommendations:</p>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>Consider implementing feature X to improve performance</li>
+                                        <li>Monitor metric Y for potential issues</li>
+                                        <li>Test hypothesis Z with A/B testing</li>
+                                    </ul>
+                                </div>
+                            `;
+                            break;
+                        case 'Summarize':
+                            outputContent.innerHTML = `
+                                <p class="mb-4">Summary of the content:</p>
+                                <div class="p-3 bg-white bg-opacity-10 rounded-lg mb-4">
+                                    <p class="font-medium mb-2">Main Points:</p>
+                                    <p>The content discusses the importance of user experience in modern applications. It highlights key principles such as simplicity, consistency, and feedback mechanisms that contribute to better user engagement.</p>
+                                </div>
+                                <div class="p-3 bg-white bg-opacity-10 rounded-lg">
+                                    <p class="font-medium mb-2">Key Takeaways:</p>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>User-centered design leads to higher satisfaction</li>
+                                        <li>Consistent interfaces reduce cognitive load</li>
+                                        <li>Timely feedback improves user confidence</li>
+                                    </ul>
+                                </div>
+                            `;
+                            break;
+                    }
+                    
+                    // Re-initialize icons for new copy buttons
+                    lucide.createIcons();
+                    
+                    // Add event listeners to new copy buttons
+                    document.querySelectorAll('.copy-btn').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const codeBlock = btn.closest('.code-block').querySelector('code');
+                            navigator.clipboard.writeText(codeBlock.textContent)
+                                .then(() => {
+                                    const originalIcon = btn.innerHTML;
+                                    btn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-green-400"></i>';
+                                    setTimeout(() => {
+                                        btn.innerHTML = originalIcon;
+                                        lucide.createIcons();
+                                    }, 2000);
+                                });
+                        });
+                    });
+                });
+            });
+            
+            // Tab switching
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('tab-active');
+                    });
+                    
+                    // Add active class to clicked tab
+                    button.classList.add('tab-active');
+                    
+                    // In a real app, you would load different content based on the tab
+                });
+            });
+            
+            // Copy button functionality
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const codeBlock = button.closest('.code-block').querySelector('code');
+                    navigator.clipboard.writeText(codeBlock.textContent)
+                        .then(() => {
+                            const originalIcon = button.innerHTML;
+                            button.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-green-400"></i>';
+                            setTimeout(() => {
+                                button.innerHTML = originalIcon;
+                                lucide.createIcons();
+                            }, 2000);
+                        });
+                });
+            });
+            
+            // Add event listeners to microphone buttons
+            internalMicBtn.addEventListener('click', () => toggleRecording('internal'));
+            externalMicBtn.addEventListener('click', () => toggleRecording('external'));
+            
+            // Keyboard shortcut for input focus
+            document.addEventListener('keydown', (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                    e.preventDefault();
+                    userInput.focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
