@@ -9,48 +9,262 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
+      background: #121212;
+      color: #e0e0e0;
     }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
     header {
-      background: #1e3a8a;
-      padding: 15px;
+      background: #1a1a1a;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .logo {
+      width: 60px;
+      height: 60px;
+    }
+    
     header h1 {
       color: white;
       margin: 0;
-      font-size: 22px;
+      font-size: 24px;
     }
+    
     nav {
-      margin-top: 10px;
+      margin-top: 20px;
+      display: flex;
+      gap: 30px;
     }
+    
     nav a {
-      display: block;
-      color: white;
-      padding: 8px 0;
+      color: #bb86fc;
       text-decoration: none;
       font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
     }
+    
     nav a:hover {
+      background-color: rgba(187, 134, 252, 0.2);
       text-decoration: underline;
     }
+    
     main {
       padding: 30px;
+    }
+    
+    .section {
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    .section h2 {
+      color: #bb86fc;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 22px;
+      border-bottom: 2px solid #bb86fc;
+      padding-bottom: 10px;
+    }
+    
+    .section-content {
+      padding: 15px 0;
+    }
+    
+    .section-item {
+      background: #2a2a2a;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      transition: transform 0.2s;
+    }
+    
+    .section-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+    
+    .section-item h3 {
+      margin-top: 0;
+      color: #03dac6;
+    }
+    
+    .section-item p {
+      margin-bottom: 0;
+      color: #e0e0e0;
+    }
+    
+    .screen-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    .screen-link-item {
+      background: #2a2a2a;
+      padding: 15px;
+      border-radius: 6px;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    
+    .screen-link-item:hover {
+      transform: translateY(-3px);
+      background-color: #333;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+    
+    .screen-link-item a {
+      color: #03dac6;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      padding: 8px 0;
+    }
+    
+    .screen-link-item a:hover {
+      text-decoration: underline;
+    }
+    
+    .footer {
+      background: #1a1a1a;
+      padding: 20px;
+      text-align: center;
+      color: #888;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>🚀 Company Portal</h1>
-    <nav>
-      <a href="home.html">Company Home Landing Page</a>
-      <a href="home_colourful.html">Company Home Landing Page - colourful -Real</a>
-      <a href="login.html">Logo Page</a>
-      <a href="sigup.html">Signup Page</a>
-      <a href="user-dashboard.html">User Dashboard</a>
-      <a href="user-reaquirements.html">user-reaquirements</a>
-      <a href="documets-helper.html">Documents-Helper</a>
-      <a href="stealth.html">Steath ai</a>
-    </nav>
+    <div class="container">
+      <div class="header-content">
+        <!-- Logo with dark background -->
+        <svg class="logo" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- Round Black Background -->
+          <circle cx="160" cy="160" r="160" fill="black" />
+          
+          <!-- Top rectangle: Red -->
+          <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#E00000" transform="rotate(0 160 160)"/>
+          
+          <!-- Top-right rectangle: Blue -->
+          <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#0066FF" transform="rotate(72 160 160)"/>
+          
+          <!-- Bottom-right rectangle: Green -->
+          <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#00A000" transform="rotate(144 160 160)"/>
+          
+          <!-- Bottom-left rectangle: Pink/Magenta -->
+          <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#E00080" transform="rotate(216 160 160)"/>
+          
+          <!-- Top-left rectangle: Purple -->
+          <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#8A2BE2" transform="rotate(288 160 160)"/>
+          
+          <!-- Solid middle circle: Yellow -->
+          <circle cx="160" cy="160" r="40" fill="#FFD700"/>
+        </svg>
+        
+        <h1>Company Portal</h1>
+      </div>
+      
+      <nav>
+        <a href="#documents">Documents</a>
+        <a href="#screens">Screens</a>
+        <a href="#srs-documents">SRS Documents</a>
+      </nav>
+    </div>
   </header>
+  
+  <main class="container">
+    <!-- Documents Section -->
+    <section id="documents" class="section">
+      <h2>Documents</h2>
+      <div class="section-content">
+        <div class="section-item">
+          <h3>Company Policies</h3>
+          <p>Access all company policies and guidelines for employees.</p>
+        </div>
+        <div class="section-item">
+          <h3>Training Materials</h3>
+          <p>Find training resources and documentation for skill development.</p>
+        </div>
+        <div class="section-item">
+          <h3>Templates</h3>
+          <p>Download templates for reports, presentations, and more.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Screens Section -->
+    <section id="screens" class="section">
+      <h2>Screens</h2>
+      <div class="section-content">
+        <div class="screen-links">
+          <div class="screen-link-item">
+            <a href="home.html">Company Home Landing Page</a>
+          </div>
+          <div class="screen-link-item">
+            <a href="home_colourful.html">Company Home Landing Page - colourful -Real</a>
+          </div>
+          <div class="screen-link-item">
+            <a href="login.html">Logo Page</a>
+          </div>
+          <div class="screen-link-item">
+            <a href="sigup.html">Signup Page</a>
+          </div>
+          <div class="screen-link-item">
+            <a href="user-dashboard.html">User Dashboard</a>
+          </div>
+          <div class="screen-link-item">
+            <a href="user-reaquirements.html">user-reaquirements</a>
+          </div>
+          <div class="screen-link-item">
+            <a href="documets-helper.html">Documents-Helper</a>
+          </div>
+          <div class="screen-link-item">
+            <a href="stealth.html">Steath ai</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SRS Documents Section -->
+    <section id="srs-documents" class="section">
+      <h2>SRS Documents</h2>
+      <div class="section-content">
+        <div class="section-item">
+          <h3>Project Requirements</h3>
+          <p>Software Requirements Specification for current projects.</p>
+        </div>
+        <div class="section-item">
+          <h3>Technical Specifications</h3>
+          <p>Detailed technical documentation for system architecture.</p>
+        </div>
+        <div class="section-item">
+          <h3>API Documentation</h3>
+          <p>Complete API reference and integration guides.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2023 Company Portal. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
