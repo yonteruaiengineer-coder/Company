@@ -112,8 +112,17 @@
             transform: scale(1.05);
         }
 
-        .logo i {
-            font-size: 1.8rem;
+        .logo-svg {
+            width: 40px;
+            height: 40px;
+            transition: var(--transition);
+        }
+
+        .logo:hover .logo-svg {
+            transform: rotate(10deg);
+        }
+
+        .logo-text {
             background: linear-gradient(45deg, #ffffff, #cccccc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -2365,7 +2374,31 @@
     <header class="header" id="header">
         <div class="nav-container">
             <div class="nav-left">
-                <a href="#home" class="logo"><i class="fas fa-brain"></i> Spartex AI</a>
+                <a href="#home" class="logo">
+                    <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+                        <!-- Round Black Background -->
+                        <circle cx="160" cy="160" r="160" fill="black" />
+                        
+                        <!-- Top rectangle: Red -->
+                        <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#E00000" transform="rotate(0 160 160)"/>
+                        
+                        <!-- Top-right rectangle: Blue -->
+                        <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#0066FF" transform="rotate(72 160 160)"/>
+                        
+                        <!-- Bottom-right rectangle: Green -->
+                        <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#00A000" transform="rotate(144 160 160)"/>
+                        
+                        <!-- Bottom-left rectangle: Pink/Magenta -->
+                        <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#E00080" transform="rotate(216 160 160)"/>
+                        
+                        <!-- Top-left rectangle: Purple -->
+                        <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#8A2BE2" transform="rotate(288 160 160)"/>
+                        
+                        <!-- Solid middle circle: Yellow -->
+                        <circle cx="160" cy="160" r="40" fill="#FFD700"/>
+                    </svg>
+                    <span class="logo-text">Spartex AI</span>
+                </a>
             </div>
             <div class="nav-right">
                 <nav>
