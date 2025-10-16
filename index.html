@@ -1,505 +1,366 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Company Portal</title>
+  <title>SynergyDocs Portal</title>
+  <!-- Load Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Load Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    /* Custom styles and configuration for Tailwind */
+    :root {
+      --primary-color: #ffffff;
+      --secondary-color: #cccccc;
+      --tertiary-color: #888888;
+      --bg-color: #000000;
+      --card-bg: #111111;
+      --border-color: #333333;
+      --hover-bg: #222222;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --border-radius: 16px;
+      --border-radius-sm: 8px;
+      --border-radius-lg: 24px;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #121212;
-      color: #e0e0e0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--primary-color);
+      line-height: 1.6;
+      font-weight: 400;
+      overflow-x: hidden;
     }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    header {
-      background: #1a1a1a;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    }
-    
-    .header-content {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    
-    .logo {
-      width: 60px;
-      height: 60px;
-    }
-    
-    header h1 {
-      color: white;
-      margin: 0;
-      font-size: 24px;
-    }
-    
-    nav {
-      margin-top: 20px;
-      display: flex;
-      gap: 30px;
-    }
-    
-    nav a {
-      color: #bb86fc;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 16px;
-      border-radius: 4px;
-      transition: background-color 0.3s;
-    }
-    
-    nav a:hover {
-      background-color: rgba(187, 134, 252, 0.2);
-      text-decoration: underline;
-    }
-    
-    main {
-      padding: 30px;
-    }
-    
-    .section {
-      background: #1e1e1e;
-      border-radius: 8px;
-      padding: 25px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    }
-    
-    .section h2 {
-      color: #bb86fc;
-      margin-top: 0;
-      margin-bottom: 20px;
-      font-size: 22px;
-      border-bottom: 2px solid #bb86fc;
-      padding-bottom: 10px;
-    }
-    
-    .section-content {
-      padding: 15px 0;
-    }
-    
-    .section-item {
-      background: #2a2a2a;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      transition: transform 0.2s;
-      cursor: pointer;
-    }
-    
-    .section-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    }
-    
-    .section-item h3 {
-      margin-top: 0;
-      color: #03dac6;
-    }
-    
-    .section-item p {
-      margin-bottom: 0;
-      color: #e0e0e0;
-    }
-    
-    .document-type {
-      font-size: 12px;
-      color: #bb86fc;
-      margin-top: 5px;
-    }
-    
-    .screen-links {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 15px;
-    }
-    
-    .screen-link-item {
-      background: #2a2a2a;
-      padding: 15px;
-      border-radius: 6px;
-      transition: transform 0.2s, background-color 0.2s;
-    }
-    
-    .screen-link-item:hover {
-      transform: translateY(-3px);
-      background-color: #333;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    }
-    
-    .screen-link-item a {
-      color: #03dac6;
-      text-decoration: none;
-      font-weight: bold;
-      display: block;
-      padding: 8px 0;
-    }
-    
-    .screen-link-item a:hover {
-      text-decoration: underline;
-    }
-    
-    .footer {
-      background: #1a1a1a;
-      padding: 20px;
-      text-align: center;
-      color: #888;
-      margin-top: 40px;
-    }
-    
-    /* Document Viewer Modal Styles */
-    .document-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
-      z-index: 1000;
-      overflow: auto;
-    }
-    
-    .document-modal-content {
-      background-color: #1e1e1e;
-      margin: 30px auto;
-      padding: 20px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 1000px;
-      position: relative;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    }
-    
-    .document-modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #333;
-      padding-bottom: 10px;
-    }
-    
-    .document-modal-title {
-      color: #bb86fc;
-      font-size: 20px;
-      margin: 0;
-    }
-    
-    .close-modal {
-      color: #888;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-    
-    .close-modal:hover {
-      color: #fff;
-    }
-    
+
     .document-viewer {
       width: 100%;
-      height: 70vh;
-      border: none;
-      border-radius: 4px;
-      background-color: #2a2a2a;
+      height: 75vh;
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-sm);
+      background-color: var(--bg-color);
+      display: block;
+    }
+
+    /* Dark theme overrides for Tailwind classes */
+    .bg-gray-900 {
+      background-color: var(--bg-color) !important;
     }
     
-    .document-loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 70vh;
-      color: #bb86fc;
-      font-size: 18px;
+    .bg-gray-800 {
+      background-color: var(--card-bg) !important;
     }
     
-    .document-error {
-      display: none;
-      color: #cf6679;
-      padding: 20px;
-      text-align: center;
-      background-color: rgba(207, 102, 121, 0.1);
-      border-radius: 4px;
-      margin: 20px 0;
+    .bg-gray-700 {
+      background-color: var(--hover-bg) !important;
     }
     
-    .document-controls {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 15px;
+    .bg-gray-600 {
+      background-color: #333333 !important;
     }
     
-    .document-info {
-      color: #888;
-      font-size: 14px;
+    .border-gray-700 {
+      border-color: var(--border-color) !important;
     }
     
-    .download-btn {
-      background-color: #03dac6;
-      color: #121212;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s;
+    .text-gray-100 {
+      color: var(--primary-color) !important;
     }
     
-    .download-btn:hover {
-      background-color: #03dac6;
-      opacity: 0.8;
+    .text-gray-300 {
+      color: var(--secondary-color) !important;
+    }
+    
+    .text-gray-500 {
+      color: var(--tertiary-color) !important;
+    }
+
+    /* Simple pulse animation for loading state */
+    @keyframes pulse {
+        0% { opacity: 0.5; }
+        50% { opacity: 1.0; }
+        100% { opacity: 0.5; }
+    }
+    .loading-pulse {
+        animation: pulse 1.5s infinite;
+    }
+
+    /* Enhanced hover effects */
+    .section-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .screen-link-item:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
-<body>
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <!-- Logo with dark background -->
-        <svg class="logo" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-          <!-- Round Black Background -->
-          <circle cx="160" cy="160" r="160" fill="black" />
-          
-          <!-- Top rectangle: Red -->
-          <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#E00000" transform="rotate(0 160 160)"/>
-          
-          <!-- Top-right rectangle: Blue -->
-          <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#0066FF" transform="rotate(72 160 160)"/>
-          
-          <!-- Bottom-right rectangle: Green -->
-          <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#00A000" transform="rotate(144 160 160)"/>
-          
-          <!-- Bottom-left rectangle: Pink/Magenta -->
-          <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#E00080" transform="rotate(216 160 160)"/>
-          
-          <!-- Top-left rectangle: Purple -->
-          <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#8A2BE2" transform="rotate(288 160 160)"/>
-          
-          <!-- Solid middle circle: Yellow -->
-          <circle cx="160" cy="160" r="40" fill="#FFD700"/>
-        </svg>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+  
+  <header class="bg-gray-800 shadow-xl border-b border-gray-700">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         
-        <h1>Company Portal</h1>
+        <!-- Header Content & Logo -->
+        <div class="flex items-center gap-4">
+          <!-- Logo with dark background -->
+          <svg class="w-12 h-12 rounded-full shadow-lg p-1 bg-gray-900" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+            <!-- Round Black Background -->
+            <circle cx="160" cy="160" r="160" fill="black" />
+            <!-- Segments from original logo -->
+            <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#E00000" transform="rotate(0 160 160)"/>
+            <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#0066FF" transform="rotate(72 160 160)"/>
+            <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#00A000" transform="rotate(144 160 160)"/>
+            <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#E00080" transform="rotate(216 160 160)"/>
+            <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#8A2BE2" transform="rotate(288 160 160)"/>
+            <!-- Solid middle circle: Yellow -->
+            <circle cx="160" cy="160" r="40" fill="#FFD700"/>
+          </svg>
+          
+          <h1 class="text-2xl font-extrabold text-white">Company Portal</h1>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="flex space-x-2 md:space-x-6 text-sm overflow-x-auto pb-2">
+          <a href="#documents" class="text-violet-400 font-medium hover:text-white transition duration-200 border-b-2 border-transparent hover:border-violet-400 pb-1 px-2">Documents</a>
+          <a href="#screens" class="text-violet-400 font-medium hover:text-white transition duration-200 border-b-2 border-transparent hover:border-violet-400 pb-1 px-2">Screens</a>
+          <a href="#srs-documents" class="text-violet-400 font-medium hover:text-white transition duration-200 border-b-2 border-transparent hover:border-violet-400 pb-1 px-2">SRS Docs</a>
+        </nav>
       </div>
-      
-      <nav>
-        <a href="#documents">Documents</a>
-        <a href="#screens">Screens</a>
-        <a href="#srs-documents">SRS Documents</a>
-      </nav>
     </div>
   </header>
   
-  <main class="container">
-    <!-- Documents Section -->
-    <section id="documents" class="section">
-      <h2>Documents</h2>
-      <div class="section-content">
-        <div class="section-item">
-          <h3>Company Policies</h3>
-          <p>Access all company policies and guidelines for employees.</p>
+  <main class="container mx-auto px-4 py-8">
+    
+    <!-- Documents Section ------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <section id="documents" class="section bg-gray-800 rounded-xl p-6 shadow-2xl mb-8">
+      <h2 class="text-2xl font-bold text-violet-400 mb-6 pb-2 border-b border-gray-700">Documents</h2>
+      <div class="space-y-4">
+        <div class="section-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 cursor-pointer shadow-md">
+          <h3 class="text-lg font-semibold text-cyan-400">Company Policies</h3>
+          <p class="text-gray-300 text-sm">Access all company policies and guidelines for employees.</p>
         </div>
-        <div class="section-item">
-          <h3>Training Materials</h3>
-          <p>Find training resources and documentation for skill development.</p>
+        <div class="section-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 cursor-pointer shadow-md">
+          <h3 class="text-lg font-semibold text-cyan-400">Training Materials</h3>
+          <p class="text-gray-300 text-sm">Find training resources and documentation for skill development.</p>
         </div>
-        <div class="section-item">
-          <h3>Templates</h3>
-          <p>Download templates for reports, presentations, and more.</p>
+        <div class="section-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 cursor-pointer shadow-md">
+          <h3 class="text-lg font-semibold text-cyan-400">Templates</h3>
+          <p class="text-gray-300 text-sm">Download templates for reports, presentations, and more.</p>
         </div>
       </div>
     </section>
     
-    <!-- Screens Section -->
-    <section id="screens" class="section">
-      <h2>Screens</h2>
-      <div class="section-content">
-        <div class="screen-links">
-          <div class="screen-link-item">
-            <a href="home.html">Company Home Landing Page</a>
-          </div>
-          <div class="screen-link-item">
-            <a href="home_colourful.html">Company Home Landing Page - colourful -Real</a>
-          </div>
-          <div class="screen-link-item">
-            <a href="login.html">Logo Page</a>
-          </div>
-          <div class="screen-link-item">
-            <a href="sigup.html">Signup Page</a>
-          </div>
-          <div class="screen-link-item">
-            <a href="user-dashboard.html">User Dashboard</a>
-          </div>
-          <div class="screen-link-item">
-            <a href="user-reaquirements.html">user-reaquirements</a>
-          </div>
-          <div class="screen-link-item">
-            <a href="documets-helper.html">Documents-Helper</a>
-          </div>
-          <div class="screen-link-item">
-            <a href="stealth.html">Steath ai</a>
-          </div>
+    <!-- Screens Section ------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <section id="screens" class="section bg-gray-800 rounded-xl p-6 shadow-2xl mb-8">
+      <h2 class="text-2xl font-bold text-violet-400 mb-6 pb-2 border-b border-gray-700">Screens</h2>
+      <div class="screen-links grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="screen-link-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md transform hover:scale-[1.02]">
+          <a href="spartex_ai_website.html" class="text-cyan-400 font-medium block">Company Home Landing Page</a>
+        </div>
+        <div class="screen-link-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md transform hover:scale-[1.02]">
+          <a href="home_colourful.html" class="text-cyan-400 font-medium block">Company Home Landing Page - colourful -Real</a>
+        </div>
+        <div class="screen-link-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md transform hover:scale-[1.02]">
+          <a href="login.html" class="text-cyan-400 font-medium block">Logo Page</a>
+        </div>
+        <div class="screen-link-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md transform hover:scale-[1.02]">
+          <a href="sigup.html" class="text-cyan-400 font-medium block">Signup Page</a>
+        </div>
+        <div class="screen-link-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md transform hover:scale-[1.02]">
+          <a href="user-dashboard.html" class="text-cyan-400 font-medium block">User Dashboard</a>
+        </div>
+        <div class="screen-link-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md transform hover:scale-[1.02]">
+          <a href="user-reaquirements.html" class="text-cyan-400 font-medium block">user-reaquirements</a>
+        </div>
+        <div class="screen-link-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md transform hover:scale-[1.02]">
+          <a href="documets-helper.html" class="text-cyan-400 font-medium block">Documents-Helper</a>
+        </div>
+        <div class="screen-link-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md transform hover:scale-[1.02]">
+          <a href="stealth.html" class="text-cyan-400 font-medium block">Steath ai</a>
         </div>
       </div>
     </section>
     
-    <!-- SRS Documents Section -->
-    <section id="srs-documents" class="section">
-      <h2>SRS Documents</h2>
-      <div class="section-content">
-        <div class="section-item" onclick="openDocument('Spartex AI - Home- Software Requirements Specification (SRS).pdf', 'Project Requirements', 'PDF')">
-          <h3>documents/Spartex AI - Home- Software Requirements Specification (SRS)</h3>
-          <p>Software Requirements Specification for current projects.</p>
-          <div class="document-type">PDF Document</div>
+    <!-- SRS Documents Section ----------------------------------------------------------------------------------------------------------------------------------------------------->
+    <section id="srs-documents" class="section bg-gray-800 rounded-xl p-6 shadow-2xl mb-8">
+      <h2 class="text-2xl font-bold text-violet-400 mb-6 pb-2 border-b border-gray-700">SRS Documents (Click to Test Viewer)</h2>
+      <div class="space-y-4">
+        
+        <!-- PDF Item - Clickable to show viewer (Reliable) -->
+        <div class="section-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 cursor-pointer shadow-md" 
+             onclick="openDocument('documents/Spartex AI - Home- Software Requirements Specification (SRS).pdf', 'Project Requirements SRS', 'PDF')">
+          <h3 class="text-lg font-semibold text-cyan-400">Spartex AI - Home- Software Requirements Specification (SRS)</h3>
+          <p class="text-gray-300 text-sm">Software Requirements Specification for current projects.</p>
+          <div class="document-type text-xs text-violet-400 mt-1">PDF Document (Preview Available)</div>
         </div>
-        <div class="section-item" onclick="openDocument('technical-specifications.docx', 'Technical Specifications', 'DOCX')">
-          <h3>Technical Specifications</h3>
-          <p>Detailed technical documentation for system architecture.</p>
-          <div class="document-type">Word Document</div>
+        
+        <!-- DOCX Item - Clickable to show download prompt (Unreliable Preview) -->
+        <div class="section-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 cursor-pointer shadow-md"
+             onclick="openDocument('documents/technical-specifications.docx', 'Technical Specifications (Backend)', 'DOCX')">
+          <h3 class="text-lg font-semibold text-cyan-400">Technical Specifications</h3>
+          <p class="text-gray-300 text-sm">Detailed technical documentation for system architecture.</p>
+          <div class="document-type text-xs text-red-400 mt-1">Word Document (Download Recommended)</div>
         </div>
-        <div class="section-item" onclick="openDocument('api-documentation.pdf', 'API Documentation', 'PDF')">
-          <h3>API Documentation</h3>
-          <p>Complete API reference and integration guides.</p>
-          <div class="document-type">PDF Document</div>
+        
+        <!-- Another PDF Item - Clickable to show viewer (Reliable) -->
+        <div class="section-item bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition duration-300 cursor-pointer shadow-md"
+             onclick="openDocument('documents/api-documentation.pdf', 'External API Documentation', 'PDF')">
+          <h3 class="text-lg font-semibold text-cyan-400">API Documentation</h3>
+          <p class="text-gray-300 text-sm">Complete API reference and integration guides.</p>
+          <div class="document-type text-xs text-violet-400 mt-1">PDF Document (Preview Available)</div>
         </div>
       </div>
     </section>
   </main>
   
   <!-- Document Viewer Modal -->
-  <div id="documentModal" class="document-modal">
-    <div class="document-modal-content">
-      <div class="document-modal-header">
-        <h3 id="documentTitle" class="document-modal-title">Document Viewer</h3>
-        <span class="close-modal" onclick="closeDocumentModal()">&times;</span>
+  <div id="documentModal" class="fixed inset-0 bg-black bg-opacity-95 z-50 overflow-y-auto hidden">
+    <div class="bg-gray-800 rounded-xl m-4 md:my-8 mx-auto p-6 md:p-8 shadow-2xl max-w-7xl">
+      <div class="document-modal-header flex justify-between items-center mb-6 pb-4 border-b border-gray-700">
+        <h3 id="documentTitle" class="text-xl md:text-2xl font-bold text-violet-400">Document Viewer</h3>
+        <span class="close-modal text-gray-400 text-4xl font-light leading-none cursor-pointer hover:text-white transition" onclick="closeDocumentModal()">&times;</span>
       </div>
       
-      <div id="documentLoading" class="document-loading">
-        Loading document...
+      <!-- Loading Indicator -->
+      <div id="documentLoading" class="flex flex-col justify-center items-center h-[70vh] text-cyan-400 text-lg hidden">
+        <svg class="animate-spin h-8 w-8 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span class="mt-4 loading-pulse">Preparing Document Preview...</span>
       </div>
       
-      <div id="documentError" class="document-error">
-        <p>Failed to load the document. The file might not exist or there could be a network issue.</p>
-        <p>Please try again later or contact support if the problem persists.</p>
+      <!-- Error/Download Prompt -->
+      <div id="documentError" class="document-error bg-red-900/20 text-red-300 p-6 rounded-lg border border-red-700 text-center text-base hidden">
+        <!-- Content inserted by JS for non-previewable files -->
       </div>
       
-      <iframe id="documentViewer" class="document-viewer" style="display:none;"></iframe>
+      <!-- Viewer Frame -->
+      <iframe id="documentViewer" class="document-viewer hidden"></iframe>
       
-      <div class="document-controls">
-        <div id="documentInfo" class="document-info"></div>
-        <button id="downloadBtn" class="download-btn" onclick="downloadDocument()">Download</button>
+      <div class="document-controls flex justify-between items-center mt-4 pt-4 border-t border-gray-700">
+        <div id="documentInfo" class="text-gray-500 text-sm"></div>
+        <button id="downloadBtn" class="bg-cyan-500 hover:bg-cyan-400 text-gray-900 font-bold py-2 px-6 rounded-lg transition duration-200 transform hover:scale-[1.02] shadow-lg">
+          Download File
+        </button>
       </div>
     </div>
   </div>
   
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2023 Company Portal. All rights reserved.</p>
+  <footer class="bg-gray-800 p-6 text-center text-gray-500 border-t border-gray-700 mt-auto">
+    <div class="container mx-auto">
+      <p>&copy; 2023 Company Portal. All rights reserved. (Styled with Tailwind CSS)</p>
     </div>
   </footer>
 
   <script>
-    // Sample document URLs - replace with your actual document URLs
+    // Document URLs for GitHub Pages - using relative paths
     const documentUrls = {
-      'project-requirements.pdf': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-      'technical-specifications.docx': 'https://calibre-ebook.com/downloads/demos/demo.docx',
-      'api-documentation.pdf': 'https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf'
+      // Using relative paths for GitHub Pages
+      'Spartex AI - Home- Software Requirements Specification (SRS).pdf': 'documents/Spartex AI - Home- Software Requirements Specification (SRS).pdf',
+      'api-documentation.pdf': 'documents/api-documentation.pdf',
+      'technical-specifications.docx': 'documents/technical-specifications.docx'
     };
     
     let currentDocument = '';
     let currentDocumentType = '';
     
+    const elements = {
+      modal: document.getElementById('documentModal'),
+      loading: document.getElementById('documentLoading'),
+      viewer: document.getElementById('documentViewer'),
+      error: document.getElementById('documentError'),
+      title: document.getElementById('documentTitle'),
+      info: document.getElementById('documentInfo'),
+      downloadBtn: document.getElementById('downloadBtn'),
+    };
+
     function openDocument(filename, title, type) {
       currentDocument = filename;
       currentDocumentType = type;
       
-      // Set document title
-      document.getElementById('documentTitle').textContent = title;
+      const documentUrl = documentUrls[filename] || filename;
+
+      // Set document title and info
+      elements.title.textContent = title;
+      elements.info.textContent = `File: ${filename} | Type: ${type}`;
       
-      // Show loading state
-      document.getElementById('documentLoading').style.display = 'flex';
-      document.getElementById('documentViewer').style.display = 'none';
-      document.getElementById('documentError').style.display = 'none';
+      // Reset states
+      elements.loading.classList.remove('hidden');
+      elements.viewer.classList.add('hidden');
+      elements.error.classList.add('hidden');
       
       // Open modal
-      document.getElementById('documentModal').style.display = 'block';
+      elements.modal.classList.remove('hidden');
       
-      // Get document URL
-      const documentUrl = documentUrls[filename] || filename;
-      
-      // Set document info
-      document.getElementById('documentInfo').textContent = `File: ${filename} | Type: ${type}`;
-      
-      // Load document based on type
+      // Load document based on type after a small delay to show loading state
       setTimeout(() => {
         if (type === 'PDF') {
           loadPdfDocument(documentUrl);
-        } else if (type === 'DOCX') {
-          loadWordDocument(documentUrl);
+        } else if (type === 'DOCX' || type === 'XLSX') {
+          // Unsupported for reliable preview
+          loadUnsupportedDocument(type);
         } else {
-          showDocumentError();
+          showDocumentError('Unsupported file type for preview.');
         }
       }, 500);
     }
     
+    /**
+     * Loads the PDF URL directly into the iframe, leveraging the browser's native viewer.
+     */
     function loadPdfDocument(url) {
-      const viewer = document.getElementById('documentViewer');
-      
-      // Using PDF.js viewer
-      viewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}`;
+      elements.viewer.src = url; 
       
       // Handle load event
-      viewer.onload = function() {
-        document.getElementById('documentLoading').style.display = 'none';
-        viewer.style.display = 'block';
+      elements.viewer.onload = function() {
+        elements.loading.classList.add('hidden');
+        elements.viewer.classList.remove('hidden');
       };
       
-      // Handle error
-      viewer.onerror = function() {
-        showDocumentError();
+      // Basic error handling for iframe load
+      elements.viewer.onerror = function() {
+        showDocumentError('Could not load PDF. The URL may be invalid or restricted by the server.');
       };
     }
     
-    function loadWordDocument(url) {
-      const viewer = document.getElementById('documentViewer');
-      
-      // Using Microsoft Office Online Viewer
-      viewer.src = `https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(url)}`;
-      
-      // Handle load event
-      viewer.onload = function() {
-        document.getElementById('documentLoading').style.display = 'none';
-        viewer.style.display = 'block';
-      };
-      
-      // Handle error
-      viewer.onerror = function() {
-        showDocumentError();
-      };
+    /**
+     * Handles non-previewable files (like DOCX) by showing a download-only message.
+     */
+    function loadUnsupportedDocument(type) {
+        elements.viewer.classList.add('hidden');
+        elements.loading.classList.add('hidden');
+
+        elements.error.innerHTML = `
+            <div class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-red-400 mb-3">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M12 10v4"/><path d="M12 18h.01"/>
+                </svg>
+                <p class="font-semibold text-lg">Preview Unavailable</p>
+                <p>The <strong>${type}</strong> document cannot be reliably previewed here due to browser security policies.</p>
+                <p class="mt-2 text-cyan-300">Please use the <strong>Download File</strong> button to access the document.</p>
+            </div>
+        `;
+        elements.error.classList.remove('hidden');
     }
-    
-    function showDocumentError() {
-      document.getElementById('documentLoading').style.display = 'none';
-      document.getElementById('documentError').style.display = 'block';
+
+    /**
+     * Shows a generic error message for loading failures.
+     */
+    function showDocumentError(message = 'Failed to load the document. The file might not exist or there could be a network issue.') {
+      elements.loading.classList.add('hidden');
+      elements.error.innerHTML = `<p class="text-lg font-semibold mb-2">Error Loading Document</p><p>${message}</p><p class="text-sm mt-3 text-gray-400">Please try again later or verify the document URL.</p>`;
+      elements.error.classList.remove('hidden');
     }
     
     function closeDocumentModal() {
-      document.getElementById('documentModal').style.display = 'none';
+      elements.modal.classList.add('hidden');
       
-      // Reset viewer
-      const viewer = document.getElementById('documentViewer');
-      viewer.src = '';
-      viewer.style.display = 'none';
+      // Reset viewer src to stop any ongoing load/playback
+      elements.viewer.src = '';
+      elements.viewer.classList.add('hidden');
     }
     
     function downloadDocument() {
@@ -508,19 +369,18 @@
       // Create a temporary link to trigger download
       const link = document.createElement('a');
       link.href = documentUrl;
-      link.download = currentDocument;
+      link.download = currentDocument; // Suggests a filename
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
     
     // Close modal when clicking outside of it
-    window.onclick = function(event) {
-      const modal = document.getElementById('documentModal');
-      if (event.target === modal) {
+    elements.modal.addEventListener('click', function(event) {
+      if (event.target === elements.modal) {
         closeDocumentModal();
       }
-    }
+    });
   </script>
 </body>
 </html>
