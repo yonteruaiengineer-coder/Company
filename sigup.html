@@ -49,22 +49,49 @@
     <!-- Main Container: Enforces Full Viewport Height and No Scrolling (overflow-hidden) -->
     <div class="h-screen w-screen flex items-center justify-center p-4 overflow-hidden">
 
+        <!-- Logo Header -->
+        <div class="absolute top-4 left-4 z-10">
+            <a href="spartex_ai_website.html" class="flex items-center gap-2 text-white hover:text-gray-300 transition duration-150">
+                <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
+                    <!-- Round Black Background -->
+                    <circle cx="160" cy="160" r="160" fill="black" />
+                    
+                    <!-- Top rectangle: Red -->
+                    <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#E00000" transform="rotate(0 160 160)"/>
+                    
+                    <!-- Top-right rectangle: Blue -->
+                    <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#0066FF" transform="rotate(72 160 160)"/>
+                    
+                    <!-- Bottom-right rectangle: Green -->
+                    <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#00A000" transform="rotate(144 160 160)"/>
+                    
+                    <!-- Bottom-left rectangle: Pink/Magenta -->
+                    <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#E00080" transform="rotate(216 160 160)"/>
+                    
+                    <!-- Top-left rectangle: Purple -->
+                    <rect x="100" y="40" width="120" height="35" rx="17.5" ry="17.5" fill="#8A2BE2" transform="rotate(288 160 160)"/>
+                    
+                    <!-- Solid middle circle: Yellow -->
+                    <circle cx="160" cy="160" r="40" fill="#FFD700"/>
+                </svg>
+                <span class="font-semibold text-lg">Spartex AI</span>
+            </a>
+        </div>
+
         <!-- UPDATED: Changed container background to bg-black for the deepest black theme -->
         <div class="max-w-6xl w-full h-full lg:max-h-[90vh] bg-black rounded-2xl shadow-2xl p-0
                     grid lg:grid-cols-2 gap-0 overflow-hidden">
 
-            <!-- LEFT COLUMN: Hero Content (Now includes a dummy image) -->
-            <div class="hidden lg:flex flex-col justify-center p-10 bg-indigo-950 rounded-l-2xl">
-                <div class="space-y-8 text-center">
-                    <!-- Dummy Image/Placeholder for AI Concept -->
-                    <img src="https://placehold.co/400x200/1E293B/A5B4FC?text=AI+Concept+Visualization" 
-                         alt="AI Concept Placeholder" 
-                         class="w-full max-w-sm mx-auto rounded-lg shadow-xl"/>
-
-                    <h1 class="text-5xl font-extrabold tracking-tight leading-tight">
+            <!-- LEFT COLUMN: Hero Content with Bear Background -->
+            <div class="hidden lg:flex flex-col justify-center p-10 bg-cover bg-center bg-no-repeat rounded-l-2xl relative" 
+                 style="background-image: url('https://images.unsplash.com/photo-1589656966895-2f33e7653819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');">
+                <!-- Dark overlay for text readability -->
+                <div class="absolute inset-0 bg-black bg-opacity-40 rounded-l-2xl"></div>
+                <div class="space-y-8 text-center relative z-10">
+                    <h1 class="text-5xl font-extrabold tracking-tight leading-tight text-white">
                         Join Spartex AI
                     </h1>
-                    <p class="text-indigo-300 text-lg">
+                    <p class="text-blue-200 text-lg">
                         Transform your business with intelligent AI solutions designed for small and medium enterprises.
                     </p>
                     <p class="text-xl font-semibold text-white pt-4">
@@ -130,7 +157,7 @@
                     <div id="message-box" class="hidden p-2 text-center text-sm rounded-lg" role="alert"></div>
 
                     <!-- Primary Action -->
-                    <button type="submit" class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-semibold shadow-lg transition duration-150 ease-in-out mt-4">
+                    <button type="submit" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold shadow-lg transition duration-150 ease-in-out mt-4">
                         Create Account
                     </button>
                 </form>
@@ -164,7 +191,7 @@
                 <!-- Login / Navigation Links (Pushed to bottom) -->
                 <div class="mt-auto pt-4 space-y-2 text-center text-sm">
                     <p class="text-gray-400">
-                        Already have an account? <a href="login.html" class="text-indigo-400 hover:text-indigo-300 font-semibold">Sign in here</a>
+                        Already have an account? <a href="login.html" class="text-blue-400 hover:text-blue-300 font-semibold">Sign in here</a>
                     </p>
                     <p>
                         <a href="spartex_ai_website.html" class="text-gray-400 hover:text-gray-300 transition duration-150 text-xs">← Back to Home</a>
